@@ -69,21 +69,57 @@ WhatsApp/courier adapters. (HR is a separate app — Frappe HRMS — and must be
 - Consequence: **no ERPNext test run was executed in Milestone 0.** Standing up a bench is the first
   task of Milestone 1 and a prerequisite for any claim of working workflows.
 
-## 5. Decisions required from the client (Milestone 0)
+## 5. Decisions
 
-1. **Base version** (C1). Recommended: pin the fork to a named integration branch
-   `mintree/v17-base` cut from a specific upstream commit (not floating `develop`), and port
-   `factory_ops` to it, using the earlier suite as the compatibility test. Alternative: stay on
-   v16.53 stable for Milestone 1 and migrate to v17 after its first stable release.
-2. **UI direction** (C3). Recommended: Desk workspaces first; keep React only for tablet
-   production screens and the Command Center if Desk cannot meet them.
-3. **`factory_ops` home** (C4). Recommended: its own repository (e.g. `vatsal04-02/factory_ops`),
-   installed as a normal bench app beside the fork.
-4. **Permission to run the earlier extractor** against `vmintree.in` (it was blocked by the
-   sandbox's code-execution policy when attempted in this session).
+Decided by the client on 2026-11-05:
 
-## 6. Next milestone
+1. **Base version (C1): fork on v17, port `factory_ops`.** Pin `mintree/v17-base` to a named
+   upstream commit rather than floating `develop`; use the earlier suite as the compatibility check.
+2. **Extraction:** the earlier extractor may be run against `vmintree.in`.
+
+Still open (recommendations in brackets, to be confirmed):
+
+3. **UI direction (C3)** — [Desk workspaces first; React only for tablet production screens and the
+   Command Center if Desk cannot meet them].
+4. **`factory_ops` home (C4)** — [its own repository, installed as a bench app beside the fork].
+5. **Core-modification policy (C2)** — [`factory_ops` first; fork patch only with a register entry].
+
+## 6. Public catalogue extraction (real output)
+
+Run 2026-11-05 17:27–17:29 UTC with `tools/website_extraction/extract.py` from
+`vatsal04-02/mintree-crm-project` (the same tool, unmodified). `robots.txt` returned 200 and was
+obeyed; 107 HTTP requests; Shopify storefront JSON; no login or bypass. Output:
+`docs/mintree/catalogue/` (images are referenced by public URL only; none were downloaded).
+
+| Measure | Count |
+|---|---:|
+| Products / sellable variants | 227 / 227 |
+| Variants with published SKU | **0** |
+| Variants with barcode | 0 |
+| Variants with compare-at price (MRP) | 226 |
+| Variants with a pack size parsed from the title | **56** |
+| Image URLs | 869 |
+| Product types / collections | 22 / 48 |
+| Recorded problems (all `missing_field`) | 230 |
+
+Consequences and caveats:
+
+- Most products are retail kits, combos and gift bags. Many titles carry no parseable pack size,
+  so 171 of 227 variants need a pack-size decision before they become stock items.
+- No SKU is published; Mintree must supply item codes or approve generated ones.
+- Several collections look internal or operational (`REELUP (DO NOT DELETE)`, `parag`,
+  `NEW TAX SLAB PRODUCTS`, `Bulk Jars`). Do not treat collection names as an item-group taxonomy
+  without Mintree review.
+- Product type is empty on some products (e.g. the first two rows), so category mapping needs
+  `category_rules.csv` plus review.
+- Prices are public selling prices on 2026-11-05, not factory costs. Product images are Mintree's
+  content: keep them out of Git and confirm usage rights before any non-local use.
+- Not available from the website and not invented here: formulas, RM/PM stock, suppliers, supplier
+  prices, production quantities, batches, QC limits, expiry. These stay synthetic and labelled
+  `DEMO - NOT REAL`.
+
+## 7. Next milestone
 
 Milestone 1 — core factory operations: stand up bench + MariaDB + Valkey on Python 3.14, install
-the fork and `factory_ops`, run the existing suite to obtain a real baseline on v17, then fix
-compatibility failures one by one with regression tests.
+the fork and `factory_ops`, run the existing suite to get a real v17 baseline, then fix
+compatibility failures one by one with regression tests. No test was run in Milestone 0.
