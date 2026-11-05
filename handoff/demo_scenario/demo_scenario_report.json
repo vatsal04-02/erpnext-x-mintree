@@ -1,0 +1,686 @@
+{
+ "passed": 84,
+ "failed": 0,
+ "checks": [
+  {
+   "check": "Procurement: the buyer cannot approve their own Purchase Order",
+   "ok": true,
+   "detail": "SelfApprovalError: You created Purchase Order PUR-ORD-2026-00001, so another approver must submit it."
+  },
+  {
+   "check": "Procurement: a Purchase Order above the approver's limit is refused",
+   "ok": true,
+   "detail": "ApprovalLimitError: Purchase Order PUR-ORD-2026-00003 is \u20b9 22,00,000.00, above your approval limit of \u20b9 5,00,000.00."
+  },
+  {
+   "check": "Procurement: every item planned from the BOMs was ordered on an approved PO",
+   "ok": true,
+   "detail": "2 POs"
+  },
+  {
+   "check": "Receiving: a raw-material receipt without a supplier COA is refused",
+   "ok": true,
+   "detail": "ReceiptDataError: Row #1 (DEMO-RM-0001): enter Certificate of Analysis before submitting."
+  },
+  {
+   "check": "Receiving: every received batch sits in its QC Hold warehouse with status Hold",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "check": "Receiving: raw-material batches carry the supplier batch number and COA",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "QC: every accepted incoming batch is Released and has left QC Hold",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "check": "QC: the rejected lot is Rejected and sits in the Rejected warehouse",
+   "ok": true,
+   "detail": "{'status': 'Rejected', 'qty': {'REJECTED - SMM': 20.0}}"
+  },
+  {
+   "check": "QC: rejected material cannot be issued to production",
+   "ok": true,
+   "detail": "QCGuardError: Row #1: stock in Rejected warehouse REJECTED - SMM can only be scrapped (Material Issue with a reason), returned to the supplier, or sent for re-test by a QA Ma"
+  },
+  {
+   "check": "Accounts: every supplier invoice is paid (no payable left)",
+   "ok": true,
+   "detail": "0 unpaid"
+  },
+  {
+   "check": "Bulk DEMO-BULK-0001: made with the BOM's process loss and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'BULK-QC-HOLD - SMM': 303.8}}, produced 303.8"
+  },
+  {
+   "check": "Bulk DEMO-BULK-0001: held bulk cannot go into filling",
+   "ok": true,
+   "detail": "QCGuardError: Row #1: DEMO-BULK-0001 is in QC Hold warehouse BULK-QC-HOLD - SMM. Stock can only leave QC Hold through a submitted QC Release."
+  },
+  {
+   "check": "FG DEMO-FG-001: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-002: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-003: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "Bulk DEMO-BULK-0002: made with the BOM's process loss and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'BULK-QC-HOLD - SMM': 184.3}}, produced 184.3"
+  },
+  {
+   "check": "Bulk DEMO-BULK-0002: held bulk cannot go into filling",
+   "ok": true,
+   "detail": "QCGuardError: Row #1: DEMO-BULK-0002 is in QC Hold warehouse BULK-QC-HOLD - SMM. Stock can only leave QC Hold through a submitted QC Release."
+  },
+  {
+   "check": "FG DEMO-FG-004: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-005: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-006: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "Bulk DEMO-BULK-0003: made with the BOM's process loss and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'BULK-QC-HOLD - SMM': 157.6}}, produced 157.6"
+  },
+  {
+   "check": "Bulk DEMO-BULK-0003: held bulk cannot go into filling",
+   "ok": true,
+   "detail": "QCGuardError: Row #1: DEMO-BULK-0003 is in QC Hold warehouse BULK-QC-HOLD - SMM. Stock can only leave QC Hold through a submitted QC Release."
+  },
+  {
+   "check": "FG DEMO-FG-007: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-008: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-009: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "Bulk DEMO-BULK-0004: made with the BOM's process loss and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'BULK-QC-HOLD - SMM': 302.25}}, produced 302.25"
+  },
+  {
+   "check": "Bulk DEMO-BULK-0004: held bulk cannot go into filling",
+   "ok": true,
+   "detail": "QCGuardError: Row #1: DEMO-BULK-0004 is in QC Hold warehouse BULK-QC-HOLD - SMM. Stock can only leave QC Hold through a submitted QC Release."
+  },
+  {
+   "check": "FG DEMO-FG-010: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-011: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-012: filled and held for QC",
+   "ok": true,
+   "detail": "{'status': 'Hold', 'qty': {'FG-QC-HOLD - SMM': 600.0}}"
+  },
+  {
+   "check": "Sales: a produced-but-unreleased lot adds nothing to available-to-sell",
+   "ok": true,
+   "detail": "600.0 -> 600.0"
+  },
+  {
+   "check": "Sales: a lot still in QC Hold cannot be put on a Delivery Note",
+   "ok": true,
+   "detail": "ValidationError: Sales Order required for Item DEMO-FG-001"
+  },
+  {
+   "check": "FG DEMO-FG-001: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-002: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-003: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-004: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-005: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-006: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-007: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-008: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-009: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-010: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-011: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "FG DEMO-FG-012: released, 500 left in FG-STORES after dispatch",
+   "ok": true,
+   "detail": "{'status': 'Released', 'qty': {'FG-STORES - SMM': 500.0}}"
+  },
+  {
+   "check": "Genealogy DEMO-FG-001: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-002: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-003: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-004: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-005: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-006: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-007: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-008: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-009: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-010: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-011: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy DEMO-FG-012: back-trace reaches bulk, packaging and every raw material, down to the receipts",
+   "ok": true,
+   "detail": "missing [], events ['Manufacture', 'Purchase Receipt']"
+  },
+  {
+   "check": "Genealogy: a surfactant batch traces forward to cleanser bulk, its finished goods and the customer's Delivery Note",
+   "ok": true,
+   "detail": "reached ['DEMO-BULK-0001', 'DEMO-BULK-0002', 'DEMO-BULK-0004', 'DEMO-FG-001', 'DEMO-FG-002', 'DEMO-FG-003', 'DEMO-FG-004', 'DEMO-FG-005'] dn rows 9"
+  },
+  {
+   "check": "Reconciliation: each bulk Work Order's reconciliation reports the quantity actually produced",
+   "ok": true,
+   "detail": "[]"
+  },
+  {
+   "check": "Accounting: the stock ledger value equals the Stock accounts in the General Ledger",
+   "ok": true,
+   "detail": "stock ledger 255253.05, GL 255253.05"
+  },
+  {
+   "check": "Accounting: the General Ledger balances (debits = credits)",
+   "ok": true,
+   "detail": "1646026.95 vs 1646026.95"
+  },
+  {
+   "check": "Accounting: every voucher balances on its own",
+   "ok": true,
+   "detail": "()"
+  },
+  {
+   "check": "Sales SAL-ORD-2026-00001: delivered with transporter and LR no, invoiced, paid; order Completed",
+   "ok": true,
+   "detail": "Completed {'status': 'Paid', 'outstanding_amount': 0.0, 'grand_total': 97600.0} {'docstatus': 1, 'transporter_name': 'DEMO Transport (NOT REAL)', 'lr_no': 'DEMO-LR-0001'}"
+  },
+  {
+   "check": "Sales SAL-ORD-2026-00002: delivered with transporter and LR no, invoiced, paid; order Completed",
+   "ok": true,
+   "detail": "Completed {'status': 'Paid', 'outstanding_amount': 0.0, 'grand_total': 130600.0} {'docstatus': 1, 'transporter_name': 'DEMO Transport (NOT REAL)', 'lr_no': 'DEMO-LR-0002'}"
+  },
+  {
+   "check": "Sales SAL-ORD-2026-00003: delivered with transporter and LR no, invoiced, paid; order Completed",
+   "ok": true,
+   "detail": "Completed {'status': 'Paid', 'outstanding_amount': 0.0, 'grand_total': 125600.0} {'docstatus': 1, 'transporter_name': 'DEMO Transport (NOT REAL)', 'lr_no': 'DEMO-LR-0003'}"
+  },
+  {
+   "check": "Sales: no reservation is left open after delivery",
+   "ok": true,
+   "detail": "0"
+  },
+  {
+   "check": "Available-to-sell equals released stock minus what was delivered, for all 12 products",
+   "ok": true,
+   "detail": "{}"
+  },
+  {
+   "check": "Wastage: a write-off without a reason is refused",
+   "ok": true,
+   "detail": "WastageReasonError: Row #1: select a Wastage Reason for writing off DEMO-PM-0001 from PM-STORES - SMM."
+  },
+  {
+   "check": "Wastage: a write-off with a reason posted and balanced",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "Permissions: production staff cannot create QC Releases; the QC officer can",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "Permissions: the read-only management user cannot create or approve anything",
+   "ok": true,
+   "detail": ""
+  },
+  {
+   "check": "Report Stock by QC Status: opens for the management user and shows rows",
+   "ok": true,
+   "detail": "42 rows"
+  },
+  {
+   "check": "Report QC Queue: opens for the management user and shows rows",
+   "ok": true,
+   "detail": "1 rows"
+  },
+  {
+   "check": "Report Production Reconciliation: opens for the management user and shows rows",
+   "ok": true,
+   "detail": "17 rows"
+  },
+  {
+   "check": "Report Wastage by Reason: opens for the management user and shows rows",
+   "ok": true,
+   "detail": "1 rows"
+  },
+  {
+   "check": "Report Available to Sell: opens for the management user and shows rows",
+   "ok": true,
+   "detail": "12 rows"
+  },
+  {
+   "check": "Report Dispatch Register: opens for the management user and shows rows",
+   "ok": true,
+   "detail": "3 rows"
+  },
+  {
+   "check": "Report Batch Genealogy: opens for the management user and shows rows",
+   "ok": true,
+   "detail": "14 rows"
+  },
+  {
+   "check": "Dashboard card 'Purchase Orders Awaiting Approval' computes for the management user",
+   "ok": true,
+   "detail": "0.0"
+  },
+  {
+   "check": "Dashboard card 'QC Decisions Pending' computes for the management user",
+   "ok": true,
+   "detail": "0.0"
+  },
+  {
+   "check": "Dashboard card 'Work Orders In Progress' computes for the management user",
+   "ok": true,
+   "detail": "0.0"
+  },
+  {
+   "check": "Dashboard card 'Batches Awaiting QC' computes for the management user",
+   "ok": true,
+   "detail": "1.0"
+  },
+  {
+   "check": "Dashboard card 'Total Stock Value' computes for the management user",
+   "ok": true,
+   "detail": "255163.05"
+  },
+  {
+   "check": "Dashboard card 'Open Sales Orders' computes for the management user",
+   "ok": true,
+   "detail": "0.0"
+  },
+  {
+   "check": "Dashboard card 'Receivables Outstanding' computes for the management user",
+   "ok": true,
+   "detail": "0.0"
+  }
+ ],
+ "facts": {
+  "catalogue": {
+   "products": 12,
+   "bulks": 4
+  },
+  "plan": {
+   "bulk_need": {
+    "DEMO-BULK-0001": 300.0,
+    "DEMO-BULK-0002": 180.0,
+    "DEMO-BULK-0003": 150.0,
+    "DEMO-BULK-0004": 300.0
+   },
+   "bulk_wo": {
+    "DEMO-BULK-0001": 310,
+    "DEMO-BULK-0002": 190,
+    "DEMO-BULK-0003": 160,
+    "DEMO-BULK-0004": 310
+   },
+   "buy": {
+    "DEMO-RM-0007": 649,
+    "DEMO-RM-0001": 128,
+    "DEMO-RM-0002": 113,
+    "DEMO-RM-0003": 43,
+    "DEMO-RM-0004": 69,
+    "DEMO-RM-0005": 11,
+    "DEMO-RM-0006": 11,
+    "DEMO-PM-0001": 2570,
+    "DEMO-PM-0002": 7560,
+    "DEMO-PM-L001": 630,
+    "DEMO-PM-0004": 7560,
+    "DEMO-PM-0006": 3150,
+    "DEMO-PM-L002": 630,
+    "DEMO-PM-L003": 630,
+    "DEMO-PM-0005": 1890,
+    "DEMO-PM-L004": 630,
+    "DEMO-PM-L005": 630,
+    "DEMO-PM-L006": 630,
+    "DEMO-PM-L007": 630,
+    "DEMO-PM-L008": 630,
+    "DEMO-PM-L009": 630,
+    "DEMO-PM-L010": 630,
+    "DEMO-PM-L011": 630,
+    "DEMO-PM-L012": 630
+   }
+  },
+  "po_totals": {
+   "PUR-ORD-2026-00001": 132372.0,
+   "PUR-ORD-2026-00002": 147048.0,
+   "PUR-ORD-2026-00003": 19000.0
+  },
+  "coa_check_done": true,
+  "reject_lot": {
+   "pr": "MAT-PRE-2026-00003",
+   "po": "PUR-ORD-2026-00003",
+   "item": "DEMO-RM-0003",
+   "batch": "DEMO-RM-0003-26-00002",
+   "warehouse": "RM-QC-HOLD - SMM",
+   "qty": 20.0
+  },
+  "purchase_receipts": [
+   "MAT-PRE-2026-00001",
+   "MAT-PRE-2026-00002",
+   "MAT-PRE-2026-00003"
+  ],
+  "documents": {
+   "purchase_receipts": [
+    "MAT-PRE-2026-00001",
+    "MAT-PRE-2026-00002",
+    "MAT-PRE-2026-00003"
+   ],
+   "orders": [
+    {
+     "so": "SAL-ORD-2026-00001",
+     "pick_list": "STO-PICK-2026-00001",
+     "dn": "MAT-DN-2026-00001",
+     "si": "ACC-SINV-2026-00001",
+     "pe": "ACC-PAY-2026-00004",
+     "items": [
+      "DEMO-FG-001",
+      "DEMO-FG-002",
+      "DEMO-FG-003",
+      "DEMO-FG-004"
+     ]
+    },
+    {
+     "so": "SAL-ORD-2026-00002",
+     "pick_list": "STO-PICK-2026-00002",
+     "dn": "MAT-DN-2026-00002",
+     "si": "ACC-SINV-2026-00002",
+     "pe": "ACC-PAY-2026-00005",
+     "items": [
+      "DEMO-FG-005",
+      "DEMO-FG-006",
+      "DEMO-FG-007",
+      "DEMO-FG-008"
+     ]
+    },
+    {
+     "so": "SAL-ORD-2026-00003",
+     "pick_list": "STO-PICK-2026-00003",
+     "dn": "MAT-DN-2026-00003",
+     "si": "ACC-SINV-2026-00003",
+     "pe": "ACC-PAY-2026-00006",
+     "items": [
+      "DEMO-FG-009",
+      "DEMO-FG-010",
+      "DEMO-FG-011",
+      "DEMO-FG-012"
+     ]
+    }
+   ],
+   "bulk": {
+    "DEMO-BULK-0001": {
+     "work_order": "MFG-WO-2026-00001",
+     "transfer": "MAT-STE-2026-00026",
+     "manufacture": "MAT-STE-2026-00027",
+     "batch": "DEMO-BULK-0001-26-00001",
+     "item": "DEMO-BULK-0001",
+     "produced": 303.8
+    },
+    "DEMO-BULK-0002": {
+     "work_order": "MFG-WO-2026-00005",
+     "transfer": "MAT-STE-2026-00038",
+     "manufacture": "MAT-STE-2026-00039",
+     "batch": "DEMO-BULK-0002-26-00001",
+     "item": "DEMO-BULK-0002",
+     "produced": 184.3
+    },
+    "DEMO-BULK-0003": {
+     "work_order": "MFG-WO-2026-00009",
+     "transfer": "MAT-STE-2026-00050",
+     "manufacture": "MAT-STE-2026-00051",
+     "batch": "DEMO-BULK-0003-26-00001",
+     "item": "DEMO-BULK-0003",
+     "produced": 157.6
+    },
+    "DEMO-BULK-0004": {
+     "work_order": "MFG-WO-2026-00013",
+     "transfer": "MAT-STE-2026-00062",
+     "manufacture": "MAT-STE-2026-00063",
+     "batch": "DEMO-BULK-0004-26-00001",
+     "item": "DEMO-BULK-0004",
+     "produced": 302.25
+    }
+   },
+   "fg": {
+    "DEMO-FG-001": {
+     "work_order": "MFG-WO-2026-00002",
+     "transfer": "MAT-STE-2026-00029",
+     "manufacture": "MAT-STE-2026-00030",
+     "batch": "DEMO-FG-001-26-00001",
+     "item": "DEMO-FG-001"
+    },
+    "DEMO-FG-002": {
+     "work_order": "MFG-WO-2026-00003",
+     "transfer": "MAT-STE-2026-00032",
+     "manufacture": "MAT-STE-2026-00033",
+     "batch": "DEMO-FG-002-26-00001",
+     "item": "DEMO-FG-002"
+    },
+    "DEMO-FG-003": {
+     "work_order": "MFG-WO-2026-00004",
+     "transfer": "MAT-STE-2026-00035",
+     "manufacture": "MAT-STE-2026-00036",
+     "batch": "DEMO-FG-003-26-00001",
+     "item": "DEMO-FG-003"
+    },
+    "DEMO-FG-004": {
+     "work_order": "MFG-WO-2026-00006",
+     "transfer": "MAT-STE-2026-00041",
+     "manufacture": "MAT-STE-2026-00042",
+     "batch": "DEMO-FG-004-26-00001",
+     "item": "DEMO-FG-004"
+    },
+    "DEMO-FG-005": {
+     "work_order": "MFG-WO-2026-00007",
+     "transfer": "MAT-STE-2026-00044",
+     "manufacture": "MAT-STE-2026-00045",
+     "batch": "DEMO-FG-005-26-00001",
+     "item": "DEMO-FG-005"
+    },
+    "DEMO-FG-006": {
+     "work_order": "MFG-WO-2026-00008",
+     "transfer": "MAT-STE-2026-00047",
+     "manufacture": "MAT-STE-2026-00048",
+     "batch": "DEMO-FG-006-26-00001",
+     "item": "DEMO-FG-006"
+    },
+    "DEMO-FG-007": {
+     "work_order": "MFG-WO-2026-00010",
+     "transfer": "MAT-STE-2026-00053",
+     "manufacture": "MAT-STE-2026-00054",
+     "batch": "DEMO-FG-007-26-00001",
+     "item": "DEMO-FG-007"
+    },
+    "DEMO-FG-008": {
+     "work_order": "MFG-WO-2026-00011",
+     "transfer": "MAT-STE-2026-00056",
+     "manufacture": "MAT-STE-2026-00057",
+     "batch": "DEMO-FG-008-26-00001",
+     "item": "DEMO-FG-008"
+    },
+    "DEMO-FG-009": {
+     "work_order": "MFG-WO-2026-00012",
+     "transfer": "MAT-STE-2026-00059",
+     "manufacture": "MAT-STE-2026-00060",
+     "batch": "DEMO-FG-009-26-00001",
+     "item": "DEMO-FG-009"
+    },
+    "DEMO-FG-010": {
+     "work_order": "MFG-WO-2026-00014",
+     "transfer": "MAT-STE-2026-00065",
+     "manufacture": "MAT-STE-2026-00066",
+     "batch": "DEMO-FG-010-26-00001",
+     "item": "DEMO-FG-010"
+    },
+    "DEMO-FG-011": {
+     "work_order": "MFG-WO-2026-00015",
+     "transfer": "MAT-STE-2026-00068",
+     "manufacture": "MAT-STE-2026-00069",
+     "batch": "DEMO-FG-011-26-00001",
+     "item": "DEMO-FG-011"
+    },
+    "DEMO-FG-012": {
+     "work_order": "MFG-WO-2026-00016",
+     "transfer": "MAT-STE-2026-00071",
+     "manufacture": "MAT-STE-2026-00072",
+     "batch": "DEMO-FG-012-26-00001",
+     "item": "DEMO-FG-012"
+    }
+   }
+  },
+  "sample_reconciliation": {
+   "work_order": "MFG-WO-2026-00001",
+   "company": "SAMPLE Mintree Manufacturing",
+   "production_item": "DEMO-BULK-0001",
+   "item_name": "DEMO Bulk for filling (NOT REAL formula)",
+   "status": "Completed",
+   "sales_order": null,
+   "planned_qty": 310.0,
+   "produced_qty": 303.8,
+   "process_loss_qty": 6.2,
+   "processed_qty": 310.0,
+   "completion_pct": 100.0,
+   "yield_pct": 98.0,
+   "min_yield_pct": null,
+   "below_min_yield": false,
+   "reconciliation": "Reconciled",
+   "wastage_value": 0.0
+  },
+  "cards": {
+   "Purchase Orders Awaiting Approval": 0.0,
+   "QC Decisions Pending": 0.0,
+   "Work Orders In Progress": 0.0,
+   "Batches Awaiting QC": 1.0,
+   "Total Stock Value": 255163.05,
+   "Open Sales Orders": 0.0,
+   "Receivables Outstanding": 0.0
+  }
+ }
+}

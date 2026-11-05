@@ -154,6 +154,15 @@ class TestGenealogyAndReconciliation(ProductionTestCase):
 		self.assertTrue(shallow["truncated"])
 		self.assertNotIn(RM1, [r["item_code"] for r in shallow["rows"] if r["level"] > 1])
 
+	def test_a_voucher_without_a_posting_date_does_not_break_the_trace(self):
+		"""Found by the 12-product demo run: a forward trace reached a voucher of a type that has no
+		``posting_date`` column and the whole trace failed with a SQL error."""
+		wh = frappe.get_all("Warehouse", filters={"is_group": 0}, pluck="name", limit=1)[0]
+		row = genealogy._describe("NO-SUCH-BATCH", "SAMPLE-RM-0001", 1, "Warehouse", wh, 0, "other", "forward")
+		self.assertEqual((row["voucher_no"], row["posting_date"]), (wh, None))  # readable, no date: not an error
+		row = genealogy._describe("NO-SUCH-BATCH", "SAMPLE-RM-0001", 1, "Sales Order", frappe.get_all("Sales Order", pluck="name", limit=1)[0] if frappe.db.count("Sales Order") else "x", 0, "other", "forward")
+		self.assertIn("posting_date", row)  # a date field of the type (transaction_date) is used when there is one
+
 	def test_cancelled_manufacture_leaves_no_lineage(self):
 		f = self.run_two_stage_flow()
 		# open the order again by cancelling its manufacture entry; the FG batch stops existing

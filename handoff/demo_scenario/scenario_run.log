@@ -1,0 +1,88 @@
+PASS Procurement: the buyer cannot approve their own Purchase Order
+PASS Procurement: a Purchase Order above the approver's limit is refused
+PASS Procurement: every item planned from the BOMs was ordered on an approved PO
+PASS Receiving: a raw-material receipt without a supplier COA is refused
+PASS Receiving: every received batch sits in its QC Hold warehouse with status Hold
+PASS Receiving: raw-material batches carry the supplier batch number and COA
+PASS QC: every accepted incoming batch is Released and has left QC Hold
+PASS QC: the rejected lot is Rejected and sits in the Rejected warehouse
+PASS QC: rejected material cannot be issued to production
+PASS Accounts: every supplier invoice is paid (no payable left)
+PASS Bulk DEMO-BULK-0001: made with the BOM's process loss and held for QC
+PASS Bulk DEMO-BULK-0001: held bulk cannot go into filling
+PASS FG DEMO-FG-001: filled and held for QC
+PASS FG DEMO-FG-002: filled and held for QC
+PASS FG DEMO-FG-003: filled and held for QC
+PASS Bulk DEMO-BULK-0002: made with the BOM's process loss and held for QC
+PASS Bulk DEMO-BULK-0002: held bulk cannot go into filling
+PASS FG DEMO-FG-004: filled and held for QC
+PASS FG DEMO-FG-005: filled and held for QC
+PASS FG DEMO-FG-006: filled and held for QC
+PASS Bulk DEMO-BULK-0003: made with the BOM's process loss and held for QC
+PASS Bulk DEMO-BULK-0003: held bulk cannot go into filling
+PASS FG DEMO-FG-007: filled and held for QC
+PASS FG DEMO-FG-008: filled and held for QC
+PASS FG DEMO-FG-009: filled and held for QC
+PASS Bulk DEMO-BULK-0004: made with the BOM's process loss and held for QC
+PASS Bulk DEMO-BULK-0004: held bulk cannot go into filling
+PASS FG DEMO-FG-010: filled and held for QC
+PASS FG DEMO-FG-011: filled and held for QC
+PASS FG DEMO-FG-012: filled and held for QC
+PASS Sales: a produced-but-unreleased lot adds nothing to available-to-sell
+PASS Sales: a lot still in QC Hold cannot be put on a Delivery Note
+PASS FG DEMO-FG-001: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-002: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-003: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-004: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-005: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-006: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-007: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-008: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-009: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-010: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-011: released, 500 left in FG-STORES after dispatch
+PASS FG DEMO-FG-012: released, 500 left in FG-STORES after dispatch
+PASS Genealogy DEMO-FG-001: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-002: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-003: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-004: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-005: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-006: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-007: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-008: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-009: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-010: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-011: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy DEMO-FG-012: back-trace reaches bulk, packaging and every raw material, down to the receipts
+PASS Genealogy: a surfactant batch traces forward to cleanser bulk, its finished goods and the customer's Delivery Note
+PASS Reconciliation: each bulk Work Order's reconciliation reports the quantity actually produced
+PASS Accounting: the stock ledger value equals the Stock accounts in the General Ledger
+PASS Accounting: the General Ledger balances (debits = credits)
+PASS Accounting: every voucher balances on its own
+PASS Sales SAL-ORD-2026-00001: delivered with transporter and LR no, invoiced, paid; order Completed
+PASS Sales SAL-ORD-2026-00002: delivered with transporter and LR no, invoiced, paid; order Completed
+PASS Sales SAL-ORD-2026-00003: delivered with transporter and LR no, invoiced, paid; order Completed
+PASS Sales: no reservation is left open after delivery
+PASS Available-to-sell equals released stock minus what was delivered, for all 12 products
+PASS Wastage: a write-off without a reason is refused
+PASS Wastage: a write-off with a reason posted and balanced
+PASS Permissions: production staff cannot create QC Releases; the QC officer can
+PASS Permissions: the read-only management user cannot create or approve anything
+PASS Report Stock by QC Status: opens for the management user and shows rows
+PASS Report QC Queue: opens for the management user and shows rows
+PASS Report Production Reconciliation: opens for the management user and shows rows
+PASS Report Wastage by Reason: opens for the management user and shows rows
+PASS Report Available to Sell: opens for the management user and shows rows
+PASS Report Dispatch Register: opens for the management user and shows rows
+PASS Report Batch Genealogy: opens for the management user and shows rows
+PASS Dashboard card 'Purchase Orders Awaiting Approval' computes for the management user
+PASS Dashboard card 'QC Decisions Pending' computes for the management user
+PASS Dashboard card 'Work Orders In Progress' computes for the management user
+PASS Dashboard card 'Batches Awaiting QC' computes for the management user
+PASS Dashboard card 'Total Stock Value' computes for the management user
+PASS Dashboard card 'Open Sales Orders' computes for the management user
+PASS Dashboard card 'Receivables Outstanding' computes for the management user
+
+84 passed, 0 failed. Report: ./demo.localhost/private/demo_scenario_report.json
+{"passed": 84, "failed": []}
+rc=0

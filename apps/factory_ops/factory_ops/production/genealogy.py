@@ -128,7 +128,10 @@ def _describe(batch_no: str, item_code: str, qty: float, voucher_type: str, vouc
 			party_type = "Customer"
 			party, posting_date = frappe.db.get_value(voucher_type, voucher_no, ["customer", "posting_date"])
 		else:
-			posting_date = frappe.db.get_value(voucher_type, voucher_no, "posting_date")
+			# any other voucher: its own date field if it has one (not every DocType has posting_date)
+			meta = frappe.get_meta(voucher_type)
+			field = next((f for f in ("posting_date", "transaction_date") if meta.has_field(f)), None)
+			posting_date = frappe.db.get_value(voucher_type, voucher_no, field) if field else None
 	return {
 		"level": level,
 		"direction": direction,

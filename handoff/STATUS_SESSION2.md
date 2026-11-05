@@ -3,7 +3,7 @@
 ## State of factory_ops (bundle `handoff/factory_ops.git.bundle`, branches inside)
 | Branch | Commit | State |
 |---|---|---|
-| `main` | 6d12182+ | `ui/roles` + regional-permission fix + test register + **Administration on native Setup/Home**. Tested (see `docs/TEST_EXECUTION_REGISTER.md`). `apps/factory_ops/` in this repo is this tree. |
+| `main` | afdef47 | `ui/roles` + regional-permission fix + test register + **Administration on native Setup/Home**. Tested (see `docs/TEST_EXECUTION_REGISTER.md`). `apps/factory_ops/` in this repo is this tree. |
 | `ui/roles` | b863d9d | historical tip; contained in main |
 | `fix/regional-permission-state` | 152a1f4 | contained in main |
 | `feature/native-admin-home` | 252e1f4 | contained in main |
@@ -34,3 +34,10 @@ Restore: `git clone handoff/factory_ops.git.bundle factory_ops && cd factory_ops
 ## Next
 Rebase `feature/decision-centre` onto main, migrate, run its four test modules (never run), fix, update the
 register, then merge. Then Stores and Inventory, Procurement, Production Floor ... as in HANDOFF.md section 7.
+
+## Addendum: 12-product DEMO scenario
+`docs/DEMO_SCENARIO.md` (in factory_ops), report and log in `handoff/demo_scenario/`. 84 of 84 checks passed on
+a dedicated `demo.localhost` site; it found and fixed one product bug (`genealogy.trace_forward` SQL error,
+regression test added). Rebuild the demo site with the commands in that document (about 5 minutes). Bench
+details: run `bench ... execute` kwargs as Python (`{"dry": True}`), and a stale partial run needs the demo site
+dropped and rebuilt (use `dry` first).

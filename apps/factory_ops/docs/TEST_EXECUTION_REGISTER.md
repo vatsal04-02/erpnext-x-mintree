@@ -113,6 +113,24 @@ page content, light and dark, 1440 px and 390 px, no page errors, 0 clipped labe
 a new tab at their real route, link groups open real lists, two real failed logins moved the card 0 to 2.
 Screenshots reviewed by hand (not committed).
 
+## H. 12-product DEMO scenario (`feature/demo-catalogue`, base `main` 75ffcc9)
+
+Reason: the owner asked for synthetic cosmetic-product data to verify that all workflows connect. Run on a
+separate demo site (`demo.localhost`, `fo_demo_site`, E2), not the test site. See `docs/DEMO_SCENARIO.md`.
+
+| Execution | Result | Note |
+|---|---|---|
+| scenario, real run #1 | stopped after 6 checks | scenario bug: a QC *Reject* needs its quantity (a Release fills it); the failed run left committed partial data, so the demo site was dropped and rebuilt |
+| scenario, dry run (rolled back) | 6 passed, 1 error | scenario bug: a rejection also needs a written reason |
+| scenario, dry run | 56 passed, 1 error | **product bug**: `genealogy.trace_forward` SQL error `Unknown column 'posting_date'` |
+| test_genealogy_reconciliation, fix reverted | 12 tests, 1 error | proves the new regression test catches the bug |
+| test_genealogy_reconciliation, fix applied | 12 tests, 12 passed | fix in `production/genealogy.py` + 1 new test (current for the commit below) |
+| scenario, dry run | 82 passed, 2 failed | scenario input: two reports require a date range |
+| scenario, real run (committed) | **84 passed, 0 failed** | current for the commit below; database counts cross-checked independently |
+| test_demo | 3 tests, 3 passed | guard test for the demo modules |
+
+The scenario is a demonstration run, not part of the automated regression suite.
+
 ## E. Not run
 
 - `feature/decision-centre` tests (`test_decision_logic`, `test_decision_queues`, `test_decision_departments`,
