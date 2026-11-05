@@ -1,0 +1,200 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "campaign",
+  "period_start",
+  "period_end",
+  "source",
+  "cb1",
+  "spend",
+  "impressions",
+  "reach",
+  "clicks",
+  "leads",
+  "purchases",
+  "purchase_value",
+  "sb1",
+  "ctr",
+  "cpc",
+  "cost_per_lead",
+  "roas",
+  "notes",
+  "is_demo"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "MKP-.YY.-.#####",
+   "default": "MKP-.YY.-.#####",
+   "reqd": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "campaign",
+   "fieldtype": "Link",
+   "label": "Campaign",
+   "options": "Marketing Campaign",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "period_start",
+   "fieldtype": "Date",
+   "label": "From",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "period_end",
+   "fieldtype": "Date",
+   "label": "To",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "label": "Source of these figures",
+   "options": "Manual entry from the ad platform\nMeta API\nDEMO - NOT REAL",
+   "reqd": 1,
+   "in_list_view": 1,
+   "description": "Meta API is set only by a verified connection; none exists"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "spend",
+   "fieldtype": "Currency",
+   "label": "Spend",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "impressions",
+   "fieldtype": "Int",
+   "label": "Impressions"
+  },
+  {
+   "fieldname": "reach",
+   "fieldtype": "Int",
+   "label": "Reach"
+  },
+  {
+   "fieldname": "clicks",
+   "fieldtype": "Int",
+   "label": "Clicks"
+  },
+  {
+   "fieldname": "leads",
+   "fieldtype": "Int",
+   "label": "Leads",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "purchases",
+   "fieldtype": "Int",
+   "label": "Purchases"
+  },
+  {
+   "fieldname": "purchase_value",
+   "fieldtype": "Currency",
+   "label": "Purchase value"
+  },
+  {
+   "fieldname": "sb1",
+   "fieldtype": "Section Break",
+   "label": "Derived (only when the inputs exist)"
+  },
+  {
+   "fieldname": "ctr",
+   "fieldtype": "Percent",
+   "label": "CTR",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cpc",
+   "fieldtype": "Currency",
+   "label": "Cost per click",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cost_per_lead",
+   "fieldtype": "Currency",
+   "label": "Cost per lead",
+   "read_only": 1
+  },
+  {
+   "fieldname": "roas",
+   "fieldtype": "Float",
+   "label": "Return on ad spend",
+   "read_only": 1,
+   "precision": "2"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "is_demo",
+   "fieldtype": "Check",
+   "label": "Synthetic demo record (DEMO - NOT REAL)",
+   "read_only": 1
+  }
+ ],
+ "modified": "2026-11-05 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Marketing",
+ "name": "Campaign Performance",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "Marketing Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "Marketing User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "Management Viewer",
+   "read": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "naming_series:",
+ "track_changes": 1
+}

@@ -1,0 +1,94 @@
+{
+ "autoname": "field:event_key",
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "field_order": [
+  "event_key",
+  "entry_key",
+  "kind",
+  "rule",
+  "notified_on",
+  "ref_doctype",
+  "ref_name",
+  "recipients"
+ ],
+ "fields": [
+  {
+   "fieldname": "event_key",
+   "fieldtype": "Data",
+   "label": "Event",
+   "reqd": 1,
+   "unique": 1,
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "entry_key",
+   "fieldtype": "Data",
+   "label": "Queue entry",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "kind",
+   "fieldtype": "Data",
+   "label": "Kind",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "rule",
+   "fieldtype": "Data",
+   "label": "Rule row",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notified_on",
+   "fieldtype": "Datetime",
+   "label": "Notified on",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "ref_doctype",
+   "fieldtype": "Link",
+   "label": "Document type",
+   "options": "DocType",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ref_name",
+   "fieldtype": "Dynamic Link",
+   "label": "Document",
+   "options": "ref_doctype",
+   "read_only": 1
+  },
+  {
+   "fieldname": "recipients",
+   "fieldtype": "Small Text",
+   "label": "Notified",
+   "read_only": 1
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "report": 1
+  },
+  {
+   "role": "Business Administrator",
+   "read": 1
+  }
+ ],
+ "actions": [],
+ "creation": "2026-11-05 19:00:00.000000",
+ "modified": "2026-11-05 19:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "module": "Factory Ops",
+ "name": "Escalation Event",
+ "states": []
+}

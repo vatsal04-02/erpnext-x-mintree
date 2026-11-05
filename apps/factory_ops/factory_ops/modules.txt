@@ -1,0 +1,9 @@
+Factory Ops
+Quality
+Inventory
+Purchase
+Production
+Sales Ops
+Research
+Marketplace
+Marketing

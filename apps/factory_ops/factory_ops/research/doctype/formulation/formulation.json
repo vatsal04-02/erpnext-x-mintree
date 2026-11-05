@@ -1,0 +1,243 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "formulation_name",
+  "formulation_code",
+  "version",
+  "previous_version",
+  "status",
+  "cb1",
+  "project",
+  "product_item",
+  "batch_size_kg",
+  "target_total",
+  "tolerance",
+  "total_percentage",
+  "is_demo",
+  "sb_items",
+  "ingredients",
+  "sb_change",
+  "change_note",
+  "submitted_by",
+  "reviewed_by",
+  "decided_on",
+  "decision_note",
+  "cb2",
+  "bom"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "FRM-.YY.-.####",
+   "default": "FRM-.YY.-.####",
+   "reqd": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "formulation_name",
+   "fieldtype": "Data",
+   "label": "Formulation",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "formulation_code",
+   "fieldtype": "Data",
+   "label": "Formulation code",
+   "reqd": 1,
+   "in_standard_filter": 1,
+   "description": "Shared by every version of the same formulation"
+  },
+  {
+   "fieldname": "version",
+   "fieldtype": "Int",
+   "label": "Version",
+   "default": "1",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "previous_version",
+   "fieldtype": "Link",
+   "label": "Previous version",
+   "options": "Formulation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nUnder Review\nTrial\nApproved\nRejected\nArchived",
+   "default": "Draft",
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Research project",
+   "options": "Research Project"
+  },
+  {
+   "fieldname": "product_item",
+   "fieldtype": "Link",
+   "label": "Bulk item it makes",
+   "options": "Item",
+   "description": "Needed to create a BOM from an approved version"
+  },
+  {
+   "fieldname": "batch_size_kg",
+   "fieldtype": "Float",
+   "label": "Batch size (kg)",
+   "default": "100",
+   "reqd": 1
+  },
+  {
+   "fieldname": "target_total",
+   "fieldtype": "Float",
+   "label": "Formula total must equal (%)",
+   "default": "100",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tolerance",
+   "fieldtype": "Float",
+   "label": "Tolerance (%)",
+   "default": "0.01",
+   "precision": "4"
+  },
+  {
+   "fieldname": "total_percentage",
+   "fieldtype": "Float",
+   "label": "Formula total (%)",
+   "read_only": 1,
+   "precision": "4",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "is_demo",
+   "fieldtype": "Check",
+   "label": "Synthetic demo record",
+   "read_only": 1,
+   "description": "DEMO - NOT REAL - NOT FOR COMMERCIAL PRODUCTION"
+  },
+  {
+   "fieldname": "sb_items",
+   "fieldtype": "Section Break",
+   "label": "Ingredients"
+  },
+  {
+   "fieldname": "ingredients",
+   "fieldtype": "Table",
+   "label": "Ingredients",
+   "options": "Formulation Ingredient"
+  },
+  {
+   "fieldname": "sb_change",
+   "fieldtype": "Section Break",
+   "label": "Change and approval"
+  },
+  {
+   "fieldname": "change_note",
+   "fieldtype": "Small Text",
+   "label": "What changed in this version"
+  },
+  {
+   "fieldname": "submitted_by",
+   "fieldtype": "Link",
+   "label": "Sent for review by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reviewed_by",
+   "fieldtype": "Link",
+   "label": "Decided by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "decided_on",
+   "fieldtype": "Datetime",
+   "label": "Decided on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "decision_note",
+   "fieldtype": "Small Text",
+   "label": "Decision note"
+  },
+  {
+   "fieldname": "cb2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "bom",
+   "fieldtype": "Link",
+   "label": "BOM created from this version",
+   "options": "BOM",
+   "read_only": 1
+  }
+ ],
+ "modified": "2026-11-05 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Research",
+ "name": "Formulation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "R&D Chemist",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "R&D Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "Manufacturing Manager",
+   "read": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "naming_series:",
+ "title_field": "formulation_name",
+ "track_changes": 1,
+ "search_fields": "formulation_name,formulation_code,status"
+}

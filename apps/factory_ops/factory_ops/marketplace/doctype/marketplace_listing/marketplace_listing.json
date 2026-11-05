@@ -1,0 +1,171 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "channel",
+  "item_code",
+  "item_name",
+  "marketplace_sku",
+  "listing_id",
+  "listing_title",
+  "active",
+  "cb1",
+  "channel_price",
+  "channel_mrp",
+  "published_qty",
+  "sync_status",
+  "last_inventory_sync",
+  "sync_error",
+  "is_demo"
+ ],
+ "fields": [
+  {
+   "fieldname": "channel",
+   "fieldtype": "Link",
+   "label": "Channel",
+   "options": "Marketplace Channel",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "ERPNext item",
+   "options": "Item",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Item name",
+   "fetch_from": "item_code.item_name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "marketplace_sku",
+   "fieldtype": "Data",
+   "label": "Marketplace SKU",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "listing_id",
+   "fieldtype": "Data",
+   "label": "Listing ID (ASIN / FSN / style ID)"
+  },
+  {
+   "fieldname": "listing_title",
+   "fieldtype": "Data",
+   "label": "Title on the channel"
+  },
+  {
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "label": "Active",
+   "default": "1",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "channel_price",
+   "fieldtype": "Currency",
+   "label": "Channel selling price"
+  },
+  {
+   "fieldname": "channel_mrp",
+   "fieldtype": "Currency",
+   "label": "Channel MRP"
+  },
+  {
+   "fieldname": "published_qty",
+   "fieldtype": "Float",
+   "label": "Quantity to publish (last computed)",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sync_status",
+   "fieldtype": "Select",
+   "label": "Inventory sync",
+   "options": "Not sent\nQueued\nSynced\nFailed",
+   "default": "Not sent",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "last_inventory_sync",
+   "fieldtype": "Datetime",
+   "label": "Last inventory sync",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sync_error",
+   "fieldtype": "Small Text",
+   "label": "Last sync error",
+   "read_only": 1
+  },
+  {
+   "fieldname": "is_demo",
+   "fieldtype": "Check",
+   "label": "Synthetic demo record (DEMO - NOT REAL)",
+   "read_only": 1
+  }
+ ],
+ "modified": "2026-11-05 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Marketplace",
+ "name": "Marketplace Listing",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "Marketplace Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "Marketplace User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "Sales Manager",
+   "read": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "hash",
+ "title_field": "marketplace_sku",
+ "track_changes": 1
+}

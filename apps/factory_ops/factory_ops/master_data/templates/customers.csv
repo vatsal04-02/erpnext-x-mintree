@@ -1,0 +1,2 @@
+customer_name*,customer_group*,territory*,customer_type,credit_limit,default_price_list,payment_terms,tax_id,email_id,mobile_no
+Example Distributor LLP,Distributors,India,Company,500000,Standard Selling,,,accounts@example.com,

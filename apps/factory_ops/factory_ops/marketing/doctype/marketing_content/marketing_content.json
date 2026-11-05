@@ -1,0 +1,181 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "title",
+  "campaign",
+  "content_type",
+  "platform",
+  "planned_date",
+  "cb1",
+  "status",
+  "assigned_to",
+  "creative",
+  "approved_by",
+  "published_url",
+  "publishing_note",
+  "is_demo",
+  "sb1",
+  "caption",
+  "review_note"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "MCT-.YY.-.####",
+   "default": "MCT-.YY.-.####",
+   "reqd": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "campaign",
+   "fieldtype": "Link",
+   "label": "Campaign",
+   "options": "Marketing Campaign",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "content_type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "Image post\nCarousel\nReel / video\nStory\nAd creative\nBlog / article\nEmail\nOther",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "platform",
+   "fieldtype": "Select",
+   "label": "Platform",
+   "options": "Meta (Facebook + Instagram)\nFacebook\nInstagram\nGoogle\nMarketplace ads\nInfluencer\nOffline\nOther",
+   "reqd": 1
+  },
+  {
+   "fieldname": "planned_date",
+   "fieldtype": "Date",
+   "label": "Planned for",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Idea\nIn Production\nIn Review\nApproved\nScheduled\nPublished\nRejected",
+   "default": "Idea",
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "assigned_to",
+   "fieldtype": "Link",
+   "label": "Assigned to",
+   "options": "User"
+  },
+  {
+   "fieldname": "creative",
+   "fieldtype": "Attach",
+   "label": "Creative file"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "published_url",
+   "fieldtype": "Data",
+   "label": "Published at (URL)",
+   "options": "URL"
+  },
+  {
+   "fieldname": "publishing_note",
+   "fieldtype": "Small Text",
+   "label": "Publishing",
+   "read_only": 1,
+   "default": "Published by hand: no publishing connection exists"
+  },
+  {
+   "fieldname": "is_demo",
+   "fieldtype": "Check",
+   "label": "Synthetic demo record (DEMO - NOT REAL)",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sb1",
+   "fieldtype": "Section Break",
+   "label": "Copy"
+  },
+  {
+   "fieldname": "caption",
+   "fieldtype": "Text",
+   "label": "Draft caption"
+  },
+  {
+   "fieldname": "review_note",
+   "fieldtype": "Small Text",
+   "label": "Review note"
+  }
+ ],
+ "modified": "2026-11-05 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Marketing",
+ "name": "Marketing Content",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "Marketing Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "Marketing User",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "naming_series:",
+ "title_field": "title",
+ "track_changes": 1
+}

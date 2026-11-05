@@ -1,0 +1,195 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "title",
+  "record_type",
+  "formulation",
+  "project",
+  "cb1",
+  "trial_date",
+  "batch_size_kg",
+  "trial_batch_ref",
+  "conducted_by",
+  "outcome",
+  "is_demo",
+  "sb1",
+  "objective",
+  "procedure",
+  "observations",
+  "conclusion",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "RDT-.YY.-.####",
+   "default": "RDT-.YY.-.####",
+   "reqd": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "record_type",
+   "fieldtype": "Select",
+   "label": "Record type",
+   "options": "Experiment\nTrial Batch",
+   "default": "Trial Batch",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "formulation",
+   "fieldtype": "Link",
+   "label": "Formulation version",
+   "options": "Formulation",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "project",
+   "fieldtype": "Link",
+   "label": "Research project",
+   "options": "Research Project",
+   "fetch_from": "formulation.project",
+   "fetch_if_empty": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "trial_date",
+   "fieldtype": "Date",
+   "label": "Date",
+   "reqd": 1,
+   "default": "Today"
+  },
+  {
+   "fieldname": "batch_size_kg",
+   "fieldtype": "Float",
+   "label": "Batch size (kg)"
+  },
+  {
+   "fieldname": "trial_batch_ref",
+   "fieldtype": "Data",
+   "label": "Trial batch reference"
+  },
+  {
+   "fieldname": "conducted_by",
+   "fieldtype": "Link",
+   "label": "Conducted by",
+   "options": "User"
+  },
+  {
+   "fieldname": "outcome",
+   "fieldtype": "Select",
+   "label": "Outcome",
+   "options": "Pending\nPass\nFail\nInconclusive",
+   "default": "Pending",
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "is_demo",
+   "fieldtype": "Check",
+   "label": "Synthetic demo record",
+   "read_only": 1,
+   "description": "DEMO - NOT REAL - NOT FOR COMMERCIAL PRODUCTION"
+  },
+  {
+   "fieldname": "sb1",
+   "fieldtype": "Section Break",
+   "label": "Record"
+  },
+  {
+   "fieldname": "objective",
+   "fieldtype": "Small Text",
+   "label": "Objective"
+  },
+  {
+   "fieldname": "procedure",
+   "fieldtype": "Text",
+   "label": "Procedure"
+  },
+  {
+   "fieldname": "observations",
+   "fieldtype": "Text",
+   "label": "Observations"
+  },
+  {
+   "fieldname": "conclusion",
+   "fieldtype": "Small Text",
+   "label": "Conclusion"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "options": "Formulation Trial",
+   "read_only": 1,
+   "no_copy": 1,
+   "print_hide": 1
+  }
+ ],
+ "modified": "2026-11-05 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Research",
+ "name": "Formulation Trial",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "R&D Chemist",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "R&D Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1,
+   "amend": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1,
+   "amend": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "naming_series:",
+ "title_field": "title",
+ "track_changes": 1,
+ "is_submittable": 1
+}

@@ -1,0 +1,203 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "channel",
+  "settlement_id",
+  "period_from",
+  "period_to",
+  "payout_date",
+  "cb1",
+  "gross_sales",
+  "commission",
+  "fees",
+  "shipping_fees",
+  "refunds",
+  "tax_withheld",
+  "net_payout",
+  "sb_rec",
+  "erp_invoiced",
+  "difference",
+  "reconciliation_status",
+  "reconciled_at",
+  "notes",
+  "is_demo"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "MKT-.YY.-.#####",
+   "default": "MKT-.YY.-.#####",
+   "reqd": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "channel",
+   "fieldtype": "Link",
+   "label": "Channel",
+   "options": "Marketplace Channel",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "settlement_id",
+   "fieldtype": "Data",
+   "label": "Settlement / payout ID",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "period_from",
+   "fieldtype": "Date",
+   "label": "Period from",
+   "reqd": 1
+  },
+  {
+   "fieldname": "period_to",
+   "fieldtype": "Date",
+   "label": "Period to",
+   "reqd": 1
+  },
+  {
+   "fieldname": "payout_date",
+   "fieldtype": "Date",
+   "label": "Payout date"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "gross_sales",
+   "fieldtype": "Currency",
+   "label": "Gross sales"
+  },
+  {
+   "fieldname": "commission",
+   "fieldtype": "Currency",
+   "label": "Commission"
+  },
+  {
+   "fieldname": "fees",
+   "fieldtype": "Currency",
+   "label": "Fixed / closing fees"
+  },
+  {
+   "fieldname": "shipping_fees",
+   "fieldtype": "Currency",
+   "label": "Shipping fees"
+  },
+  {
+   "fieldname": "refunds",
+   "fieldtype": "Currency",
+   "label": "Refunds"
+  },
+  {
+   "fieldname": "tax_withheld",
+   "fieldtype": "Currency",
+   "label": "Tax withheld (TCS / TDS)"
+  },
+  {
+   "fieldname": "net_payout",
+   "fieldtype": "Currency",
+   "label": "Net payout",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "sb_rec",
+   "fieldtype": "Section Break",
+   "label": "Reconciliation against ERPNext"
+  },
+  {
+   "fieldname": "erp_invoiced",
+   "fieldtype": "Currency",
+   "label": "Invoiced in ERPNext for the period's orders",
+   "read_only": 1
+  },
+  {
+   "fieldname": "difference",
+   "fieldtype": "Currency",
+   "label": "Gross sales − invoiced",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reconciliation_status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Not reconciled\nMatched\nDifference",
+   "default": "Not reconciled",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "reconciled_at",
+   "fieldtype": "Datetime",
+   "label": "Reconciled at",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "is_demo",
+   "fieldtype": "Check",
+   "label": "Synthetic demo record (DEMO - NOT REAL)",
+   "read_only": 1
+  }
+ ],
+ "modified": "2026-11-05 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Marketplace",
+ "name": "Marketplace Settlement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "Marketplace Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "Accounts User",
+   "read": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "Accounts Manager",
+   "read": 1,
+   "write": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "naming_series:",
+ "title_field": "settlement_id",
+ "track_changes": 1
+}

@@ -1,0 +1,85 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "item_code",
+  "item_name",
+  "ingredient_category",
+  "percentage",
+  "quantity_kg",
+  "required",
+  "function"
+ ],
+ "fields": [
+  {
+   "fieldname": "item_code",
+   "fieldtype": "Link",
+   "label": "Ingredient",
+   "options": "Item",
+   "reqd": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Name",
+   "fetch_from": "item_code.item_name",
+   "read_only": 1,
+   "in_list_view": 1,
+   "columns": 3
+  },
+  {
+   "fieldname": "ingredient_category",
+   "fieldtype": "Link",
+   "label": "Category",
+   "options": "Ingredient Category",
+   "fetch_from": "item_code.fo_ingredient_category",
+   "read_only": 1
+  },
+  {
+   "fieldname": "percentage",
+   "fieldtype": "Float",
+   "label": "% w/w",
+   "reqd": 1,
+   "in_list_view": 1,
+   "precision": "4",
+   "columns": 2
+  },
+  {
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
+   "label": "Kg per batch",
+   "read_only": 1,
+   "in_list_view": 1,
+   "precision": "4",
+   "columns": 2
+  },
+  {
+   "fieldname": "required",
+   "fieldtype": "Check",
+   "label": "Required",
+   "in_list_view": 1,
+   "columns": 1,
+   "description": "Must stay in every later version of this formulation"
+  },
+  {
+   "fieldname": "function",
+   "fieldtype": "Data",
+   "label": "Function in the formula"
+  }
+ ],
+ "modified": "2026-11-05 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Research",
+ "name": "Formulation Ingredient",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "istable": 1,
+ "editable_grid": 1
+}

@@ -1,0 +1,216 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "channel_name",
+  "provider",
+  "connection_state",
+  "access_note",
+  "access_granted",
+  "cb1",
+  "sync_enabled",
+  "allocation_percent",
+  "safety_stock",
+  "default_customer",
+  "price_list",
+  "dispatch_warehouse",
+  "sb_cred",
+  "seller_id",
+  "marketplace_region",
+  "client_id",
+  "client_secret",
+  "refresh_token",
+  "webhook_secret",
+  "sb_state",
+  "last_tested_at",
+  "last_success_at",
+  "last_error",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "channel_name",
+   "fieldtype": "Data",
+   "label": "Channel",
+   "reqd": 1,
+   "unique": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "provider",
+   "fieldtype": "Select",
+   "label": "Connector",
+   "options": "Amazon SP-API\nFlipkart Seller API\nMyntra Partner API\nNykaa Seller API",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "connection_state",
+   "fieldtype": "Select",
+   "label": "Connection state",
+   "options": "Not implemented\nNot configured\nAwaiting credentials\nAccess required\nConnected\nSynchronising\nError",
+   "default": "Not configured",
+   "read_only": 1,
+   "in_list_view": 1,
+   "description": "Set by the system: Connected only after a successful live API test"
+  },
+  {
+   "fieldname": "access_note",
+   "fieldtype": "Small Text",
+   "label": "Access requirement",
+   "read_only": 1
+  },
+  {
+   "fieldname": "access_granted",
+   "fieldtype": "Check",
+   "label": "Partner access granted by the channel",
+   "description": "Tick only when the channel has confirmed API access in writing"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "sync_enabled",
+   "fieldtype": "Check",
+   "label": "Synchronise automatically",
+   "description": "Has no effect until the channel is Connected"
+  },
+  {
+   "fieldname": "allocation_percent",
+   "fieldtype": "Percent",
+   "label": "Share of available-to-sell published here",
+   "default": "0",
+   "description": "All channels together may not exceed 100 %, so marketplaces never publish the same unit twice"
+  },
+  {
+   "fieldname": "safety_stock",
+   "fieldtype": "Float",
+   "label": "Safety stock held back per listing",
+   "default": "0"
+  },
+  {
+   "fieldname": "default_customer",
+   "fieldtype": "Link",
+   "label": "Customer for this channel's orders",
+   "options": "Customer"
+  },
+  {
+   "fieldname": "price_list",
+   "fieldtype": "Link",
+   "label": "Channel price list",
+   "options": "Price List"
+  },
+  {
+   "fieldname": "dispatch_warehouse",
+   "fieldtype": "Link",
+   "label": "Dispatch from (usable store)",
+   "options": "Warehouse",
+   "description": "Empty: each item's released-stock store (e.g. FG-STORES). Never a QC Hold store."
+  },
+  {
+   "fieldname": "sb_cred",
+   "fieldtype": "Section Break",
+   "label": "Credentials (stored encrypted on the server; never sent to the browser)"
+  },
+  {
+   "fieldname": "seller_id",
+   "fieldtype": "Data",
+   "label": "Seller / partner ID"
+  },
+  {
+   "fieldname": "marketplace_region",
+   "fieldtype": "Data",
+   "label": "Marketplace / region ID"
+  },
+  {
+   "fieldname": "client_id",
+   "fieldtype": "Data",
+   "label": "Client ID"
+  },
+  {
+   "fieldname": "client_secret",
+   "fieldtype": "Password",
+   "label": "Client secret"
+  },
+  {
+   "fieldname": "refresh_token",
+   "fieldtype": "Password",
+   "label": "Refresh token"
+  },
+  {
+   "fieldname": "webhook_secret",
+   "fieldtype": "Password",
+   "label": "Webhook signing secret"
+  },
+  {
+   "fieldname": "sb_state",
+   "fieldtype": "Section Break",
+   "label": "Synchronisation"
+  },
+  {
+   "fieldname": "last_tested_at",
+   "fieldtype": "Datetime",
+   "label": "Last connection test",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_success_at",
+   "fieldtype": "Datetime",
+   "label": "Last successful sync",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_error",
+   "fieldtype": "Small Text",
+   "label": "Last error",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "modified": "2026-11-05 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Marketplace",
+ "name": "Marketplace Channel",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "Marketplace Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "Marketplace User",
+   "read": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "field:channel_name",
+ "track_changes": 1,
+ "naming_rule": "By fieldname"
+}

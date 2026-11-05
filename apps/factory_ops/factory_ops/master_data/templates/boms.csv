@@ -1,0 +1,5 @@
+bom_item*,bom_quantity*,process_loss_percentage,component_item*,component_qty*
+BULK-0101,100,2,RM-0101,5
+BULK-0101,100,2,RM-0102,95
+FG-0201,1000,0,BULK-0101,30
+FG-0201,1000,0,PM-0301,1000

@@ -1,0 +1,173 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "title",
+  "formulation",
+  "trial",
+  "storage_condition",
+  "cb1",
+  "start_date",
+  "duration_days",
+  "status",
+  "result",
+  "is_demo",
+  "sb1",
+  "acceptance_criteria",
+  "readings",
+  "conclusion"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "STB-.YY.-.####",
+   "default": "STB-.YY.-.####",
+   "reqd": 1,
+   "hidden": 1
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Data",
+   "label": "Title",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "formulation",
+   "fieldtype": "Link",
+   "label": "Formulation version",
+   "options": "Formulation",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "trial",
+   "fieldtype": "Link",
+   "label": "Trial",
+   "options": "Formulation Trial"
+  },
+  {
+   "fieldname": "storage_condition",
+   "fieldtype": "Select",
+   "label": "Storage condition",
+   "options": "25°C / 60% RH\n30°C / 65% RH\n40°C / 75% RH\n5°C\nPhotostability\nOther",
+   "reqd": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "duration_days",
+   "fieldtype": "Int",
+   "label": "Planned duration (days)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Planned\nIn Progress\nCompleted\nCancelled",
+   "default": "Planned",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "result",
+   "fieldtype": "Select",
+   "label": "Result",
+   "options": "Pending\nPass\nFail",
+   "default": "Pending",
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "is_demo",
+   "fieldtype": "Check",
+   "label": "Synthetic demo record",
+   "read_only": 1,
+   "description": "DEMO - NOT REAL - NOT FOR COMMERCIAL PRODUCTION"
+  },
+  {
+   "fieldname": "sb1",
+   "fieldtype": "Section Break",
+   "label": "Acceptance criteria and readings"
+  },
+  {
+   "fieldname": "acceptance_criteria",
+   "fieldtype": "Small Text",
+   "label": "Acceptance criteria",
+   "description": "Stated by R&D; the system does not invent limits"
+  },
+  {
+   "fieldname": "readings",
+   "fieldtype": "Table",
+   "label": "Readings",
+   "options": "Stability Reading"
+  },
+  {
+   "fieldname": "conclusion",
+   "fieldtype": "Small Text",
+   "label": "Conclusion"
+  }
+ ],
+ "modified": "2026-11-05 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Research",
+ "name": "Stability Study",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "R&D Chemist",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "R&D Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "QA Manager",
+   "read": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "naming_series:",
+ "title_field": "title",
+ "track_changes": 1
+}

@@ -1,0 +1,30 @@
+{
+ "actions": [],
+ "autoname": "field:wastage_reason",
+ "creation": "2026-11-05 12:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["wastage_reason", "enabled", "description"],
+ "fields": [
+  {"fieldname": "wastage_reason", "fieldtype": "Data", "label": "Wastage Reason", "reqd": 1, "unique": 1, "in_list_view": 1},
+  {"default": "1", "fieldname": "enabled", "fieldtype": "Check", "label": "Enabled", "in_list_view": 1},
+  {"fieldname": "description", "fieldtype": "Small Text", "label": "Description"}
+ ],
+ "modified": "2026-11-05 12:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Production",
+ "name": "Wastage Reason",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {"create": 1, "read": 1, "write": 1, "delete": 1, "report": 1, "role": "System Manager"},
+  {"create": 1, "read": 1, "write": 1, "report": 1, "role": "Manufacturing Manager"},
+  {"create": 1, "read": 1, "write": 1, "report": 1, "role": "Stock Manager"},
+  {"read": 1, "report": 1, "role": "Manufacturing User"},
+  {"read": 1, "report": 1, "role": "Stock User"}
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

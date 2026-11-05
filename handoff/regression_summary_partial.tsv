@@ -1,0 +1,27 @@
+test_acceptance_e2e	0	22s
+test_admin_access	0	100s
+test_batch_eligibility	0	46s
+test_branding	0	56s
+test_business_admin	0	120s
+test_demo	0	2s
+test_desk_ui	0	60s
+test_factory_os_api	0	21s
+test_genealogy_reconciliation	0	47s
+test_guards	0	21s
+test_install_and_queue	0	49s
+test_lifecycle_routes	0	28s
+test_maintenance	0	17s
+test_marketing	0	16s
+test_marketplace	0	17s
+test_master_data	0	87s
+test_operational_cards	0	57s
+test_plant_maintenance	0	19s
+test_production	0	46s
+test_purchase	0	46s
+test_qc_release	0	22s
+test_qc_retest	0	21s
+test_research	0	17s
+test_sales	0	54s
+test_spike_qi_lifecycle	1	15s
+test_workspaces	1	3s
+ALL_MODULES_DONE

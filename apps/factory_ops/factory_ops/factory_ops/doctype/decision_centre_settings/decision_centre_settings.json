@@ -1,0 +1,93 @@
+{
+ "issingle": 1,
+ "track_changes": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "field_order": [
+  "queue_section",
+  "cache_seconds",
+  "expiry_window_days",
+  "dispatch_window_days",
+  "max_rows_per_source",
+  "rules_section",
+  "rules"
+ ],
+ "fields": [
+  {
+   "fieldname": "queue_section",
+   "fieldtype": "Section Break",
+   "label": "Queue"
+  },
+  {
+   "fieldname": "cache_seconds",
+   "fieldtype": "Int",
+   "label": "Cache (seconds)",
+   "default": "30",
+   "non_negative": 1,
+   "description": "How long a person's queue is reused before it is rebuilt from the documents. 0 = always rebuild."
+  },
+  {
+   "fieldname": "expiry_window_days",
+   "fieldtype": "Int",
+   "label": "Expiry window (days)",
+   "default": "30",
+   "non_negative": 1,
+   "description": "Batches expiring within this many days appear in the queue. The closest quarter of the window is High priority."
+  },
+  {
+   "fieldname": "dispatch_window_days",
+   "fieldtype": "Int",
+   "label": "Dispatch window (days)",
+   "default": "3",
+   "non_negative": 1,
+   "description": "Open orders due within this many days appear as awaiting dispatch."
+  },
+  {
+   "fieldname": "max_rows_per_source",
+   "fieldtype": "Int",
+   "label": "Most rows per source",
+   "default": "200",
+   "non_negative": 1,
+   "description": "A safety limit; when reached, the queue says it is truncated."
+  },
+  {
+   "fieldname": "rules_section",
+   "fieldtype": "Section Break",
+   "label": "Escalation rules"
+  },
+  {
+   "fieldname": "rules",
+   "fieldtype": "Table",
+   "label": "Rules",
+   "options": "Decision Rule",
+   "description": "No rule is active until you enable it and set its hours: the thresholds are Mintree's decision."
+  }
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1
+  },
+  {
+   "role": "Business Administrator",
+   "read": 1,
+   "write": 1
+  },
+  {
+   "role": "Management Viewer",
+   "read": 1
+  }
+ ],
+ "actions": [],
+ "creation": "2026-11-05 19:00:00.000000",
+ "modified": "2026-11-05 19:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "module": "Factory Ops",
+ "name": "Decision Centre Settings",
+ "states": []
+}

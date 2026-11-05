@@ -1,0 +1,176 @@
+{
+ "autoname": "naming_series:",
+ "track_changes": 0,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "title_field": "action",
+ "field_order": [
+  "naming_series",
+  "action",
+  "outcome",
+  "user",
+  "acted_on",
+  "entry_section",
+  "category",
+  "department",
+  "priority",
+  "ref_doctype",
+  "ref_name",
+  "kind",
+  "entry_key",
+  "detail_section",
+  "note",
+  "assigned_to",
+  "message"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "options": "MGA-.YY.-.#####",
+   "default": "MGA-.YY.-.#####",
+   "hidden": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "action",
+   "fieldtype": "Select",
+   "label": "Action",
+   "options": "Approved\nSubmitted\nAcknowledged\nAssigned\nNote\nEscalated",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "outcome",
+   "fieldtype": "Select",
+   "label": "Outcome",
+   "options": "Done\nRefused",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "By",
+   "options": "User",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "acted_on",
+   "fieldtype": "Datetime",
+   "label": "When",
+   "in_list_view": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "entry_section",
+   "fieldtype": "Section Break",
+   "label": "What it was about"
+  },
+  {
+   "fieldname": "category",
+   "fieldtype": "Data",
+   "label": "Decision",
+   "read_only": 1,
+   "in_list_view": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "priority",
+   "fieldtype": "Data",
+   "label": "Priority when acted on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ref_doctype",
+   "fieldtype": "Link",
+   "label": "Document type",
+   "options": "DocType",
+   "read_only": 1
+  },
+  {
+   "fieldname": "ref_name",
+   "fieldtype": "Dynamic Link",
+   "label": "Document",
+   "options": "ref_doctype",
+   "read_only": 1
+  },
+  {
+   "fieldname": "kind",
+   "fieldtype": "Data",
+   "label": "Kind",
+   "read_only": 1
+  },
+  {
+   "fieldname": "entry_key",
+   "fieldtype": "Data",
+   "label": "Queue key",
+   "read_only": 1
+  },
+  {
+   "fieldname": "detail_section",
+   "fieldtype": "Section Break",
+   "label": "Detail"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "Note",
+   "read_only": 1
+  },
+  {
+   "fieldname": "assigned_to",
+   "fieldtype": "Link",
+   "label": "Assigned to",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "message",
+   "fieldtype": "Small Text",
+   "label": "Result",
+   "read_only": 1,
+   "description": "What the system answered, including why an action was refused."
+  }
+ ],
+ "permissions": [
+  {
+   "role": "Business Administrator",
+   "read": 1,
+   "report": 1,
+   "export": 1
+  },
+  {
+   "role": "Management Viewer",
+   "read": 1,
+   "report": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "report": 1
+  }
+ ],
+ "actions": [],
+ "creation": "2026-11-05 19:00:00.000000",
+ "modified": "2026-11-05 19:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "module": "Factory Ops",
+ "name": "Management Action",
+ "states": []
+}

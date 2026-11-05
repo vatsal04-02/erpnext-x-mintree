@@ -1,0 +1,38 @@
+# Development services for Mintree Factory OS (factory_ops).
+# Mirrors frappe_docker's devcontainer services (MariaDB 11.8 with the same server flags);
+# bench itself runs on the developer host. Development only: weak passwords, no TLS.
+name: ${DEV_PROJECT:-factory-os-dev}
+services:
+  mariadb:
+    image: docker.io/mariadb:11.8
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --innodb-snapshot-isolation=OFF
+      - --port=${DEV_DB_PORT:-3307}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DEV_DB_ROOT_PASSWORD:-dev-only-root}
+      MARIADB_AUTO_UPGRADE: 1
+    network_mode: host
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    volumes:
+      - mariadb-data:/var/lib/mysql
+  # Valkey (BSD-3-Clause) instead of Redis: see docs/DECISIONS.md D-004.
+  cache:
+    image: docker.io/valkey/valkey:8.1-alpine
+    command: ["valkey-server", "--port", "${DEV_CACHE_PORT:-13100}", "--bind", "127.0.0.1", "--save", "", "--appendonly", "no"]
+    network_mode: host
+  queue:
+    image: docker.io/valkey/valkey:8.1-alpine
+    command: ["valkey-server", "--port", "${DEV_QUEUE_PORT:-11100}", "--bind", "127.0.0.1"]
+    network_mode: host
+    volumes:
+      - queue-data:/data
+volumes:
+  mariadb-data:
+  queue-data:

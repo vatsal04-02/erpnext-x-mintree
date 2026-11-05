@@ -1,0 +1,153 @@
+{
+ "actions": [],
+ "creation": "2026-11-04 21:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "purchase_section",
+  "enforce_purchase_approval",
+  "qc_section",
+  "min_shelf_life_days_for_dispatch",
+  "column_break_qc",
+  "qc_sla_hours_rm",
+  "qc_sla_hours_pm",
+  "qc_sla_hours_bulk",
+  "qc_sla_hours_fg",
+  "production_section",
+  "min_yield_percent",
+  "sales_section",
+  "require_dispatch_details",
+  "column_break_sales",
+  "allow_sales_invoice_stock_update"
+ ],
+ "fields": [
+  {
+   "fieldname": "purchase_section",
+   "fieldtype": "Section Break",
+   "label": "Purchase"
+  },
+  {
+   "default": "1",
+   "description": "Purchase Orders can only be submitted by a user with a sufficient Purchase Approval Limit who did not create them. Turning this off is recorded in the change history.",
+   "fieldname": "enforce_purchase_approval",
+   "fieldtype": "Check",
+   "label": "Enforce purchase approval limits"
+  },
+  {
+   "fieldname": "qc_section",
+   "fieldtype": "Section Break",
+   "label": "Quality control"
+  },
+  {
+   "default": "0",
+   "description": "Minimum days of shelf life a batch must have left to be dispatched. 0 blocks only expired batches. To be confirmed by the client.",
+   "fieldname": "min_shelf_life_days_for_dispatch",
+   "fieldtype": "Int",
+   "label": "Minimum remaining shelf life for dispatch (days)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "column_break_qc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "48",
+   "description": "Target hours from receipt to QC decision. SAMPLE values until the client sets them.",
+   "fieldname": "qc_sla_hours_rm",
+   "fieldtype": "Int",
+   "label": "QC SLA, raw material (hours)",
+   "non_negative": 1
+  },
+  {
+   "default": "24",
+   "fieldname": "qc_sla_hours_pm",
+   "fieldtype": "Int",
+   "label": "QC SLA, packing material (hours)",
+   "non_negative": 1
+  },
+  {
+   "default": "8",
+   "fieldname": "qc_sla_hours_bulk",
+   "fieldtype": "Int",
+   "label": "QC SLA, bulk (hours)",
+   "non_negative": 1
+  },
+  {
+   "default": "24",
+   "fieldname": "qc_sla_hours_fg",
+   "fieldtype": "Int",
+   "label": "QC SLA, finished goods (hours)",
+   "non_negative": 1
+  },
+  {
+   "fieldname": "sales_section",
+   "fieldtype": "Section Break",
+   "label": "Sales and dispatch"
+  },
+  {
+   "default": "0",
+   "description": "A Delivery Note cannot be submitted without the transporter and the LR / AWB number.",
+   "fieldname": "require_dispatch_details",
+   "fieldtype": "Check",
+   "label": "Require dispatch details on Delivery Notes"
+  },
+  {
+   "fieldname": "column_break_sales",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "description": "Off: stock leaves only through Delivery Notes, and Sales Invoices are made without stock update, so stock is deducted once. Turn on only for counter sales.",
+   "fieldname": "allow_sales_invoice_stock_update",
+   "fieldtype": "Check",
+   "label": "Allow stock update on Sales Invoices"
+  },
+  {
+   "fieldname": "production_section",
+   "fieldtype": "Section Break",
+   "label": "Production"
+  },
+  {
+   "fieldname": "min_yield_percent",
+   "fieldtype": "Percent",
+   "label": "Minimum yield (%)",
+   "description": "Optional. When set, the Production Reconciliation report flags a Work Order whose yield is below this value. Blank means no check. Mintree must supply the value; none is assumed.",
+   "non_negative": 1
+  }
+ ],
+ "issingle": 1,
+ "modified": "2026-11-05 20:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Factory Ops",
+ "name": "Factory Ops Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "QA Manager",
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "QC Officer"
+  },
+  {
+   "read": 1,
+   "role": "Stock Manager"
+  },
+  {
+   "read": 1,
+   "role": "Sales Manager"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

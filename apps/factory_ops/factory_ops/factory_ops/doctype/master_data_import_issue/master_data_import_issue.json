@@ -1,0 +1,62 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 22:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "istable": 1,
+ "field_order": [
+  "severity",
+  "row_no",
+  "column_name",
+  "value",
+  "message"
+ ],
+ "fields": [
+  {
+   "fieldname": "severity",
+   "fieldtype": "Select",
+   "label": "Severity",
+   "options": "Error\nWarning",
+   "in_list_view": 1,
+   "columns": 1
+  },
+  {
+   "fieldname": "row_no",
+   "fieldtype": "Int",
+   "label": "Row",
+   "in_list_view": 1,
+   "columns": 1,
+   "description": "Spreadsheet row (the header is row 1); 0 = the whole file"
+  },
+  {
+   "fieldname": "column_name",
+   "fieldtype": "Data",
+   "label": "Column",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "value",
+   "fieldtype": "Data",
+   "label": "Value",
+   "in_list_view": 1,
+   "columns": 2
+  },
+  {
+   "fieldname": "message",
+   "fieldtype": "Small Text",
+   "label": "Reason",
+   "in_list_view": 1,
+   "columns": 4
+  }
+ ],
+ "modified": "2026-11-05 22:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Factory Ops",
+ "name": "Master Data Import Issue",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

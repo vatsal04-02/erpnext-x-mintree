@@ -1,0 +1,153 @@
+{
+ "actions": [],
+ "autoname": "format:MDI-{YY}-{#####}",
+ "creation": "2026-11-05 22:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "import_type",
+  "company",
+  "posting_date",
+  "column_break_a",
+  "status",
+  "import_file",
+  "section_summary",
+  "summary",
+  "created_records",
+  "section_issues",
+  "issues"
+ ],
+ "fields": [
+  {
+   "fieldname": "import_type",
+   "fieldtype": "Select",
+   "label": "Import Type",
+   "options": "Items\nSuppliers\nCustomers\nBOMs\nOpening Stock\nItem Prices",
+   "reqd": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "description": "Required for Customers (credit limits), BOMs and Opening Stock."
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "Posting Date",
+   "depends_on": "eval:doc.import_type=='Opening Stock'",
+   "description": "Opening stock is posted on this date."
+  },
+  {
+   "fieldname": "column_break_a",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Draft\nHas Errors\nReady to Import\nImported\nFailed",
+   "read_only": 1,
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "import_file",
+   "fieldtype": "Attach",
+   "label": "File (XLSX or CSV)",
+   "description": "Use the template for the import type (Download Template)."
+  },
+  {
+   "fieldname": "section_summary",
+   "fieldtype": "Section Break",
+   "label": "Result"
+  },
+  {
+   "fieldname": "summary",
+   "fieldtype": "Small Text",
+   "label": "Summary",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "created_records",
+   "fieldtype": "Long Text",
+   "label": "Records Created",
+   "read_only": 1,
+   "no_copy": 1
+  },
+  {
+   "fieldname": "section_issues",
+   "fieldtype": "Section Break",
+   "label": "Issues"
+  },
+  {
+   "fieldname": "issues",
+   "fieldtype": "Table",
+   "label": "Issues",
+   "options": "Master Data Import Issue",
+   "read_only": 1,
+   "no_copy": 1
+  }
+ ],
+ "modified": "2026-11-05 22:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Factory Ops",
+ "name": "Master Data Import",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "read": 1,
+   "write": 1,
+   "delete": 1,
+   "report": 1,
+   "role": "System Manager"
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "write": 1,
+   "report": 1,
+   "role": "Item Manager"
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "write": 1,
+   "report": 1,
+   "role": "Stock Manager"
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "write": 1,
+   "report": 1,
+   "role": "Purchase Master Manager"
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "write": 1,
+   "report": 1,
+   "role": "Sales Master Manager"
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "write": 1,
+   "report": 1,
+   "role": "Manufacturing Manager"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

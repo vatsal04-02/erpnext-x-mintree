@@ -1,0 +1,28 @@
+/* Mintree accent for Desk and the login page. Deliberately small: a colour, not a re-skin.
+
+   #01877A is the brand teal (the logo). Buttons and links carry text, and white on #01877A is
+   4.4:1, just under WCAG AA (4.5:1) for normal text, so they use a darker shade of the same hue,
+   #01766B (white on it is 5.5:1; tested in tests/test_branding.py).
+
+   Light theme only: Frappe's dark theme keeps its own colours. */
+:root:not([data-theme="dark"]) {
+	--primary: #01766b;
+	--primary-color: #01766b;
+	--btn-primary: #01766b;
+}
+
+/* Frappe v16's Espresso solid buttons (login "Continue", dialogs). Only the default theme:
+   destructive buttons use data-theme="red" and keep their own colour. */
+:root:not([data-theme="dark"]) .es-button:not([data-theme]) {
+	--bt-solid-bg: #01766b;
+	--bt-solid-bg-hover: #016459;
+	--bt-solid-bg-active: #01564d;
+}
+
+/* the login page logo is the full wordmark, not a square tile */
+.page-card-head .app-logo,
+.login-content .app-logo,
+.for-login .app-logo {
+	height: 32px;
+	width: auto;
+}

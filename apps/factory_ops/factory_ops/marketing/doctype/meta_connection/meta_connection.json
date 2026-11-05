@@ -1,0 +1,114 @@
+{
+ "actions": [],
+ "creation": "2026-11-05 15:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "connection_name",
+  "connection_state",
+  "business_id",
+  "ad_account_id",
+  "app_id",
+  "app_secret",
+  "system_user_token",
+  "cb1",
+  "access_note",
+  "last_tested_at",
+  "last_error"
+ ],
+ "fields": [
+  {
+   "fieldname": "connection_name",
+   "fieldtype": "Data",
+   "label": "Connection",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "connection_state",
+   "fieldtype": "Select",
+   "label": "State",
+   "options": "Not implemented\nNot configured\nAwaiting credentials\nAccess required\nConnected\nError",
+   "default": "Not configured",
+   "read_only": 1
+  },
+  {
+   "fieldname": "business_id",
+   "fieldtype": "Data",
+   "label": "Business portfolio ID"
+  },
+  {
+   "fieldname": "ad_account_id",
+   "fieldtype": "Data",
+   "label": "Ad account ID (act_…)"
+  },
+  {
+   "fieldname": "app_id",
+   "fieldtype": "Data",
+   "label": "App ID"
+  },
+  {
+   "fieldname": "app_secret",
+   "fieldtype": "Password",
+   "label": "App secret"
+  },
+  {
+   "fieldname": "system_user_token",
+   "fieldtype": "Password",
+   "label": "System user access token"
+  },
+  {
+   "fieldname": "cb1",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "access_note",
+   "fieldtype": "Small Text",
+   "label": "What access needs",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_tested_at",
+   "fieldtype": "Datetime",
+   "label": "Last test",
+   "read_only": 1
+  },
+  {
+   "fieldname": "last_error",
+   "fieldtype": "Small Text",
+   "label": "Last error",
+   "read_only": 1
+  }
+ ],
+ "modified": "2026-11-05 15:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Marketing",
+ "name": "Meta Connection",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "Marketing Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  },
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "delete": 1,
+   "report": 1,
+   "print": 1,
+   "export": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "field:connection_name",
+ "naming_rule": "By fieldname"
+}
