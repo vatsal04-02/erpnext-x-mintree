@@ -1,0 +1,4 @@
+migrate rc=0
+test_admin_access rc=1
+test_production rc=0
+RERUN_DONE

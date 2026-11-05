@@ -1,0 +1,32 @@
+Starting test run with parameters: site=test.localhost, module=factory_ops.tests.test_branding, verbose=False, tests=(), force=False, profile=False, failfast=False, skip_before_tests=False, debug=False, selected_categories=[]
+View detailed logs (using --verbose): /home/frappe/frappe-bench/logs/frappe.testing.log
+
+Running 16 unspecified-category tests for factory_ops
+
+factory_ops.tests.test_branding.TestAssetsAndStyle
+   [32m ✔ [0m test_accent_is_light_theme_only_and_leaves_destructive_buttons_alone
+   [32m ✔ [0m test_app_identity_hooks
+   [32m ✔ [0m test_asset_urls_match_the_files
+   [32m ✔ [0m test_button_and_link_colours_have_readable_text_contrast
+   [32m ✔ [0m test_logo_assets_are_safe_wellformed_svgs_in_the_brand_colour
+   [32m ✔ [0m test_mark_is_square_so_it_fits_the_desk_rail_tile
+   [32m ✔ [0m test_stylesheet_is_registered_for_desk_and_website_pages
+
+factory_ops.tests.test_branding.TestBrandingSettings
+   [32m ✔ [0m test_a_customisation_made_in_desk_is_never_overwritten
+   [32m ✔ [0m test_migrate_applied_the_branding_unless_someone_customised_it
+   [32m ✔ [0m test_migrate_runs_it [31m (10.4s)[0m
+   [32m ✔ [0m test_stock_defaults_are_replaced_and_it_is_idempotent
+
+factory_ops.tests.test_branding.TestLoginLogo
+   [32m ✔ [0m test_a_logo_set_in_website_settings_wins
+   [32m ✔ [0m test_hook_is_registered
+   [32m ✔ [0m test_login_pages_get_the_wordmark
+   [32m ✔ [0m test_no_request_is_handled
+   [32m ✔ [0m test_other_pages_are_untouched
+
+
+----------------------------------------------------------------------
+Ran 16 tests in 46.674s
+
+OK

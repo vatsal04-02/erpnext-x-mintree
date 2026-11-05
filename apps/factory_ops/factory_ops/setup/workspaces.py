@@ -709,54 +709,60 @@ WORKSPACES = {
 			),
 		),
 	},
-	"Administration": {
-		"icon": "settings-2",
-		"technical": True,  # users, roles, settings, audit and integrations: the System Administrator only
-		"roles": [ROLE_ADMIN],
-		"cards": [
-			"FO Enabled Users",
-			"FO Failed Logins 7 Days",
-			"FO Errors 7 Days",
-			"FO Failed Jobs 7 Days",
-		],
-		"charts": [],
-		# one tile per department page, then ERPNext's own module pages: the administrator moves
-		# between them without changing accounts. Targets are workspace routes, not DocTypes.
-		"shortcuts": [(name, U) for name in DEPARTMENT_ORDER] + [(name, U) for name in ERPNEXT_MODULES],
-		"links": _links(
-			(
-				"Users and access",
-				[
-					("User", D, "User"),
-					("Role", D, "Role"),
-					("Role Profile", D, "Role Profile"),
-					("Module Profile", D, "Module Profile"),
-					("User Permission", D, "User Permission"),
-				],
-			),
-			(
-				"Audit trail",
-				[
-					("Activity Log", D, "Activity Log"),
-					("Version", D, "Version"),
-					("Access Log", D, "Access Log"),
-					("Error Log", D, "Error Log"),
-					("Scheduled Job Log", D, "Scheduled Job Log"),
-				],
-			),
-			(
-				"Settings and integrations",
-				[
-					("System Settings", D, "System Settings"),
-					("Factory Ops Settings", D, "Factory Ops Settings"),
-					("Integration Request", D, "Integration Request"),
-					("Webhook", D, "Webhook"),
-					("Marketplace Channel", D, "Marketplace Channel"),
-					("Meta Connection", D, "Meta Connection"),
-				],
-			),
+
+}
+
+# The Mintree Administration page. It is NOT a workspace of its own: it is the content of ERPNext's own
+# Setup/Home workspace (``Home``), applied as a site customization by setup/admin_home.py. These are its
+# cards, tiles and link groups, kept here beside the other pages' definitions.
+ADMIN_HOME = {
+	"icon": "settings-2",
+	"technical": True,  # users, roles, settings, audit and integrations: the System Administrator only
+	"roles": [ROLE_ADMIN],
+	"cards": [
+		"FO Enabled Users",
+		"FO Failed Logins 7 Days",
+		"FO Errors 7 Days",
+		"FO Failed Jobs 7 Days",
+	],
+	"charts": [],
+	# one tile per department page, then ERPNext's own module pages: the administrator moves
+	# between them without changing accounts. Targets are workspace routes, not DocTypes.
+	"shortcuts": [(name, U) for name in DEPARTMENT_ORDER] + [(name, U) for name in ERPNEXT_MODULES],
+	"links": _links(
+		(
+			"Users and access",
+			[
+				("User", D, "User"),
+				("Role", D, "Role"),
+				("Role Profile", D, "Role Profile"),
+				("Module Profile", D, "Module Profile"),
+				("User Permission", D, "User Permission"),
+			],
 		),
-	},
+		(
+			"Audit trail",
+			[
+				("Activity Log", D, "Activity Log"),
+				("Version", D, "Version"),
+				("Access Log", D, "Access Log"),
+				("Error Log", D, "Error Log"),
+				("Scheduled Job Log", D, "Scheduled Job Log"),
+			],
+		),
+		(
+			"Settings and integrations",
+			[
+				("System Settings", D, "System Settings"),
+				("Factory Ops Settings", D, "Factory Ops Settings"),
+				("Integration Request", D, "Integration Request"),
+				("Webhook", D, "Webhook"),
+				("Marketplace Channel", D, "Marketplace Channel"),
+				("Meta Connection", D, "Meta Connection"),
+				("Setup Onboarding", D, "Module Onboarding"),  # ERPNext's checklist, no longer the landing panel
+			],
+		),
+	),
 }
 
 # Read-only rights for Management Viewer (permlevel 0 read + report). No create, write, submit.
@@ -791,6 +797,10 @@ def ensure_workspaces():
 		_workspace(name, ws)
 		_sidebar(name, ws)
 		_desktop_icon(name, ws)
+	from factory_ops.setup.admin_home import ensure_admin_home, retire_standalone_administration
+
+	retire_standalone_administration()  # the Administration page is now ERPNext's own Setup/Home
+	ensure_admin_home()
 
 
 def ensure_management_role():

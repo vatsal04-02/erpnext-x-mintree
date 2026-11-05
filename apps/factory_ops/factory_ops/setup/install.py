@@ -42,10 +42,6 @@ def apply_setup():
 	from factory_ops.setup.audit_trail import ensure_audit_trails
 
 	ensure_audit_trails()
-	from factory_ops.decisions.setup import ensure_default_rules
-
-	ensure_single_defaults("Decision Centre Settings")
-	ensure_default_rules()
 	from factory_ops.setup.landing import apply_to_existing_users
 
 	apply_to_existing_users()

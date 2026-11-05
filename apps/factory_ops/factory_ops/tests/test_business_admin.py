@@ -14,7 +14,7 @@ from factory_ops.purchase.approval import ApprovalLimitError, approve_purchase_o
 from factory_ops.setup import admin_access, audit_trail
 from factory_ops.setup.workspaces import WORKSPACES, page_roles
 from factory_ops.tests import test_purchase
-from factory_ops.tests.test_admin_access import TRANSACTIONS, all_visible
+from factory_ops.tests.test_admin_access import TRANSACTIONS, all_visible, effective_home
 from factory_ops.tests.utils import (
 	LIMIT_LOW,
 	PLAIN_ITEM,
@@ -33,7 +33,7 @@ SYS = "System Manager"
 OWNER = "fo-owner@example.com"
 OWNER_NO_LIMIT = "fo-owner-nolimit@example.com"
 SYSADMIN = "fo-sysadmin@example.com"
-DEPARTMENT_PAGES = set(WORKSPACES) - {"Administration"}
+DEPARTMENT_PAGES = set(WORKSPACES)  # the technical Administration page is ERPNext's Home, not a department page
 # configuration and identity: the System Administrator's job, never the owner's
 TECHNICAL = (
 	"User", "Role", "Role Profile", "Module Profile", "User Permission", "Custom Field", "Property Setter",
@@ -115,9 +115,8 @@ class TestWhatTheOwnerSees(OwnerTestCase):
 	def test_every_business_page_but_not_the_technical_one(self):
 		visible = all_visible(OWNER)
 		self.assertFalse(DEPARTMENT_PAGES - visible, f"hidden from the owner: {DEPARTMENT_PAGES - visible}")
-		self.assertNotIn("Administration", visible)
-		self.assertNotIn(BIZ, {r.role for r in frappe.get_doc("Desktop Icon", "Administration").roles})
-		self.assertNotIn(BIZ, {r.role for r in frappe.get_doc("Workspace", "Administration").roles})
+		self.assertNotIn("Home", visible)
+		self.assertNotIn(BIZ, {r.role for r in effective_home().roles})
 
 	def test_the_system_administrator_still_sees_everything_including_the_technical_page(self):
 		visible = all_visible(SYSADMIN)
@@ -127,7 +126,7 @@ class TestWhatTheOwnerSees(OwnerTestCase):
 		for name, ws in WORKSPACES.items():
 			roles = set(page_roles(ws))
 			self.assertIn(SYS, roles, name)
-			self.assertEqual(BIZ in roles, name != "Administration", name)
+			self.assertIn(BIZ, roles, name)
 
 	def test_the_owner_reads_and_reports_on_every_operational_doctype(self):
 		blocked = [
@@ -454,7 +453,7 @@ class TestLanding(OwnerTestCase):
 		from factory_ops.setup.landing import landing_workspace
 
 		self.assertEqual(landing_workspace([BIZ]), "Management")
-		self.assertEqual(landing_workspace([SYS]), "Administration")
+		self.assertEqual(landing_workspace([SYS]), "Home")  # ERPNext's Setup/Home, customised as Administration
 		self.assertEqual(landing_workspace([BIZ, SYS]), "Management")  # the business view first
 		self.assertEqual(landing_workspace([BIZ, "Manufacturing User"]), "Management")  # never one department
 		self.assertEqual(frappe.db.get_value("User", OWNER, "default_workspace"), "Management")

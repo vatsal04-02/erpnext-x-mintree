@@ -1,0 +1,77 @@
+Starting test run with parameters: site=test.localhost, module=factory_ops.tests.test_business_admin, verbose=False, tests=(), force=False, profile=False, failfast=False, skip_before_tests=False, debug=False, selected_categories=[]
+View detailed logs (using --verbose): /home/frappe/frappe-bench/logs/frappe.testing.log
+
+Running 43 unspecified-category tests for factory_ops
+
+factory_ops.tests.test_business_admin.TestApprovalsStayAuthorised
+   [32m ✔ [0m test_a_disabled_limit_counts_as_no_limit
+       ▸  /home/frappe/frappe-bench/apps/frappe/frappe/model/qb_query.py:163: V17FrappeDeprecationWarning: This codepath was marked (DATE: 2024-01-01) deprecated for removal (from v17 onwards); note:
+       ▸   The 'limit_page_length' parameter is deprecated. Use 'limit' instead.
+       ▸  
+       ▸    deprecation_warning(
+   [32m ✔ [0m test_a_limit_for_another_company_does_not_apply
+   [32m ✔ [0m test_a_limit_of_zero_approves_nothing
+   [32m ✔ [0m test_a_submitted_order_cannot_be_approved_again
+   [32m ✔ [0m test_an_order_exactly_at_the_limit_is_approved
+   [32m ✔ [0m test_limits_are_per_person_a_low_limit_approver_hits_the_same_boundary
+   [32m ✔ [0m test_one_paisa_above_the_limit_is_refused
+   [32m ✔ [0m test_the_approval_is_on_the_audit_trail_and_the_owner_can_read_it
+   [32m ✔ [0m test_the_function_is_not_a_back_door_for_people_without_the_right
+   [32m ✔ [0m test_the_owner_approves_within_the_limit_an_accountant_gave_them
+   [32m ✔ [0m test_the_owner_cannot_raise_cancel_or_amend_purchase_orders
+   [32m ✔ [0m test_the_standard_form_path_needs_write_which_the_owner_does_not_have
+   [32m ✔ [0m test_without_an_approval_limit_the_role_alone_approves_nothing
+
+factory_ops.tests.test_business_admin.TestAuditTrail
+   [32m ✔ [0m test_a_change_to_a_material_request_leaves_a_version
+   [32m ✔ [0m test_a_change_to_a_quality_inspection_leaves_a_version
+   [32m ✔ [0m test_a_change_to_a_stock_reconciliation_leaves_a_version
+   [32m ✔ [0m test_every_sensitive_doctype_records_changes
+   [32m ✔ [0m test_tracking_that_was_switched_off_is_switched_back_on
+
+factory_ops.tests.test_business_admin.TestControlsHoldForTheOwner
+   [32m ✔ [0m test_financial_postings_follow_accounting_permissions
+   [32m ✔ [0m test_held_stock_cannot_be_moved_or_dispatched_by_the_owner
+   [32m ✔ [0m test_qc_approval_stays_with_qc
+   [32m ✔ [0m test_transaction_documents_are_view_only_except_the_one_approval
+
+factory_ops.tests.test_business_admin.TestLanding
+   [32m ✔ [0m test_the_owner_lands_on_the_business_dashboard_and_the_technician_on_administration
+
+factory_ops.tests.test_business_admin.TestRolesAndProfiles
+   [32m ✔ [0m test_a_role_profile_gives_exactly_its_role
+       ▸  /home/frappe/frappe-bench/apps/frappe/frappe/core/doctype/user/user.py:306: V16FrappeDeprecationWarning: This codepath was marked (DATE: unknown) deprecated for removal (from v16 onwards); note:
+       ▸   The field `role_profile_name` is deprecated and will be removed in v16, use `role_profiles` child table instead.
+       ▸  
+       ▸    deprecation_warning(
+   [32m ✔ [0m test_each_administrator_is_made_by_choosing_a_role_profile
+   [32m ✔ [0m test_profiles_and_grants_are_idempotent [31m (3.54s)[0m
+   [32m ✔ [0m test_the_business_administrator_role_exists_and_is_a_desk_role
+
+factory_ops.tests.test_business_admin.TestWhatTheOwnerCannotDo
+   [32m ✔ [0m test_no_delete_right_anywhere [31m (3.04s)[0m
+   [32m ✔ [0m test_no_technical_configuration
+   [32m ✔ [0m test_shared_workspaces_can_only_be_changed_by_a_workspace_manager
+   [32m ✔ [0m test_the_only_action_right_is_to_submit_purchase_orders
+   [32m ✔ [0m test_the_owner_cannot_change_who_may_approve
+   [32m ✔ [0m test_the_system_administrator_is_not_an_approver
+
+factory_ops.tests.test_business_admin.TestWhatTheOwnerSees
+   [32m ✔ [0m test_every_business_page_but_not_the_technical_one
+   [32m ✔ [0m test_every_link_and_report_on_every_business_page_opens_for_the_owner
+   [32m ✔ [0m test_page_roles_follow_the_rule
+   [32m ✔ [0m test_the_owner_reads_and_reports_on_every_operational_doctype [31m (2.5s)[0m
+   [32m ✔ [0m test_the_owner_reads_the_document_audit_trail
+   [32m ✔ [0m test_the_system_administrator_still_sees_everything_including_the_technical_page
+
+factory_ops.tests.test_business_admin.TestWhatTheSystemAdministratorCanDo
+   [32m ✔ [0m test_identity_and_configuration_are_theirs
+   [32m ✔ [0m test_system_settings_and_the_audit_log_are_theirs
+   [32m ✔ [0m test_the_technical_administrator_still_approves_nothing_in_the_business
+   [32m ✔ [0m test_workspace_configuration_comes_with_workspace_manager
+
+
+----------------------------------------------------------------------
+Ran 43 tests in 113.466s
+
+OK

@@ -167,7 +167,6 @@ scheduler_events = {
 	# Marketplaces: retry rate-limited calls after their back-off; push inventory to Connected,
 	# sync-enabled channels only (none is Connected until a live API test succeeds)
 	"hourly": [
-		"factory_ops.decisions.escalation.run",  # notify once when a decision has waited past a configured rule
 		"factory_ops.marketplace.service.retry_due_operations",
 		"factory_ops.marketplace.service.push_inventory_for_connected_channels",
 	],

@@ -1,0 +1,53 @@
+Starting test run with parameters: site=test.localhost, module=factory_ops.tests.test_desk_ui, verbose=False, tests=(), force=False, profile=False, failfast=False, skip_before_tests=False, debug=False, selected_categories=[]
+View detailed logs (using --verbose): /home/frappe/frappe-bench/logs/frappe.testing.log
+
+Running 18 unspecified-category tests for factory_ops
+
+factory_ops.tests.test_desk_ui.TestMilestoneAReportsOnWorkspaces
+   [32m ✔ [0m test_a_report_is_offered_only_to_roles_that_can_run_it [31m (2.41s)[0m
+       ▸  /home/frappe/frappe-bench/apps/frappe/frappe/model/qb_query.py:163: V17FrappeDeprecationWarning: This codepath was marked (DATE: 2024-01-01) deprecated for removal (from v17 onwards); note:
+       ▸   The 'limit_page_length' parameter is deprecated. Use 'limit' instead.
+       ▸  
+       ▸    deprecation_warning(
+   [32m ✔ [0m test_production_floor_offers_both_reports_to_production
+
+factory_ops.tests.test_desk_ui.TestResearchWorkspace
+   [32m ✔ [0m test_cards_count_what_they_say
+   [32m ✔ [0m test_every_card_is_readable_and_computes_for_research_users
+   [32m ✔ [0m test_every_shortcut_opens_for_the_research_roles
+   [32m ✔ [0m test_it_belongs_to_the_research_roles_only
+   [32m ✔ [0m test_url_is_a_clean_slug
+
+factory_ops.tests.test_desk_ui.TestRoleLanding
+   [32m ✔ [0m test_a_users_own_choice_is_never_overwritten
+   [32m ✔ [0m test_administrators_land_on_the_global_page_not_a_department
+   [32m ✔ [0m test_existing_users_without_a_choice_are_filled_by_migrate
+   [31m ✖ [0m test_landing_is_always_a_workspace_the_user_can_see
+   [32m ✔ [0m test_role_combinations_map_to_one_workspace
+   [32m ✔ [0m test_roles_without_a_department_get_no_landing
+
+factory_ops.tests.test_desk_ui.TestWorkspaceLayout
+   [32m ✔ [0m test_a_target_has_one_entry_point_per_page
+   [32m ✔ [0m test_at_most_four_shortcuts_so_the_row_is_never_ragged
+   [32m ✔ [0m test_every_row_holds_one_kind_of_widget_in_a_fixed_order
+   [32m ✔ [0m test_no_title_block_and_no_stray_spacers
+   [32m ✔ [0m test_saved_pages_match_the_definitions
+
+
+======================================================================
+ FAIL  test_landing_is_always_a_workspace_the_user_can_see (factory_ops.tests.test_desk_ui.TestRoleLanding.test_landing_is_always_a_workspace_the_user_can_see)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frappe/factory_ops/factory_ops/tests/test_desk_ui.py", line 238, in test_landing_is_always_a_workspace_the_user_can_see
+    self.assertIn(expected, visible_workspaces(email), f"{roles} lands on a page they cannot open")
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    email = 'fo-landing-systemmanager@example.com'
+    expected = 'Home'
+    roles = ['System Manager']
+    self = <factory_ops.tests.test_desk_ui.TestRoleLanding testMethod=test_landing_is_always_a_workspace_the_user_can_see>
+AssertionError: 'Home' not found in {'Research and Development', 'Quality Control', 'Production Floor', 'Factory Accounts', 'Procurement', 'Stores and Warehouse', 'Management', 'Sales and Dispatch', 'Plant Maintenance'} : ['System Manager'] lands on a page they cannot open
+
+----------------------------------------------------------------------
+Ran 18 tests in 60.476s
+
+FAILED (failures=1)

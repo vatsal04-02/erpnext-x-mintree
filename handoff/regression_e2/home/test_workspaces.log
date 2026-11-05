@@ -1,0 +1,39 @@
+Starting test run with parameters: site=test.localhost, module=factory_ops.tests.test_workspaces, verbose=False, tests=(), force=False, profile=False, failfast=False, skip_before_tests=False, debug=False, selected_categories=[]
+View detailed logs (using --verbose): /home/frappe/frappe-bench/logs/frappe.testing.log
+
+Running 15 unspecified-category tests for factory_ops
+
+factory_ops.tests.test_workspaces.TestDashboardFigures
+   [32m ✔ [0m test_document_cards_count_what_they_say
+   [32m ✔ [0m test_empty_data_is_handled
+   [32m ✔ [0m test_stock_value_cards_equal_the_stock_balance_report
+   [32m ✔ [0m test_wastage_card_report_and_ledger_agree
+
+factory_ops.tests.test_workspaces.TestRequirementsReport
+   [32m ✔ [0m test_need_supply_and_shortfall
+
+factory_ops.tests.test_workspaces.TestRoleAccess
+   [32m ✔ [0m test_each_role_sees_its_own_workspaces_and_icons
+   [32m ✔ [0m test_every_card_on_a_workspace_computes_for_its_users
+   [32m ✔ [0m test_every_card_on_a_workspace_is_readable_by_its_users
+   [32m ✔ [0m test_management_viewer_reads_but_never_changes
+       ▸  /home/frappe/frappe-bench/apps/frappe/frappe/model/qb_query.py:163: V17FrappeDeprecationWarning: This codepath was marked (DATE: 2024-01-01) deprecated for removal (from v17 onwards); note:
+       ▸   The 'limit_page_length' parameter is deprecated. Use 'limit' instead.
+       ▸  
+       ▸    deprecation_warning(
+   [32m ✔ [0m test_no_screen_lets_anyone_move_held_stock
+   [32m ✔ [0m test_rolling_window_cards_include_today
+
+factory_ops.tests.test_workspaces.TestStockByQCStatusEligibility
+   [32m ✔ [0m test_dispatch_eligibility_column_follows_the_central_rule
+
+factory_ops.tests.test_workspaces.TestWorkspaceDefinitions
+   [32m ✔ [0m test_every_link_card_and_chart_exists
+   [32m ✔ [0m test_names_are_valid_desk_routes
+   [32m ✔ [0m test_setup_is_idempotent [31m (8.52s)[0m
+
+
+----------------------------------------------------------------------
+Ran 15 tests in 80.012s
+
+OK

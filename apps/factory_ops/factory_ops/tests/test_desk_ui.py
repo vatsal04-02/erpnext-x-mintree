@@ -13,6 +13,7 @@ import frappe
 from frappe.desk.doctype.number_card.number_card import get_result
 
 from factory_ops.setup.workspaces import WORKSPACES, card_name, layout_blocks, unique_links
+from factory_ops.tests.test_admin_access import all_visible
 from factory_ops.tests.test_workspaces import visible_workspaces
 from factory_ops.tests.utils import USER_PRODUCTION, FactoryOpsTestCase, ensure_user
 
@@ -88,9 +89,6 @@ class TestWorkspaceLayout(FactoryOpsTestCase):
 
 	def test_at_most_four_shortcuts_so_the_row_is_never_ragged(self):
 		for name, ws in WORKSPACES.items():
-			if name == "Administration":  # a navigation page: whole rows of four tiles
-				self.assertEqual(len(ws["shortcuts"]) % 4, 0, name)
-				continue
 			self.assertLessEqual(len(ws["shortcuts"]), 4, f"{name}: shortcuts wrap onto a second row")
 
 
@@ -211,9 +209,9 @@ class TestRoleLanding(FactoryOpsTestCase):
 		(["Maintenance User"], "Plant Maintenance"),
 		(["Maintenance Manager", "Maintenance User"], "Plant Maintenance"),
 		(["Maintenance User", "Stock User"], "Plant Maintenance"),  # technicians are Stock users too
-		(["System Manager"], "Administration"),
-		(["System Manager", "Manufacturing User", "Stock User"], "Administration"),  # global, not a department
-		(["System Manager", "QC Officer"], "Administration"),
+		(["System Manager"], "Home"),
+		(["System Manager", "Manufacturing User", "Stock User"], "Home"),  # global, not a department
+		(["System Manager", "QC Officer"], "Home"),
 		(["Business Administrator"], "Management"),  # the owner: the consolidated business dashboard
 		(["Business Administrator", "Manufacturing User"], "Management"),
 		(["Business Administrator", "System Manager"], "Management"),  # the business view first
@@ -238,7 +236,7 @@ class TestRoleLanding(FactoryOpsTestCase):
 		for roles, expected in self.CASES:
 			email = ensure_user(self.email(roles), roles)
 			self.assertEqual(frappe.db.get_value("User", email, "default_workspace"), expected, roles)
-			self.assertIn(expected, visible_workspaces(email), f"{roles} lands on a page they cannot open")
+			self.assertIn(expected, all_visible(email), f"{roles} lands on a page they cannot open")
 
 	def test_a_users_own_choice_is_never_overwritten(self):
 		roles = ["Manufacturing User", "Stock User"]
@@ -263,13 +261,13 @@ class TestRoleLanding(FactoryOpsTestCase):
 
 	def test_administrators_land_on_the_global_page_not_a_department(self):
 		email = ensure_user("fo-landing-sysmgr@example.com", ["System Manager"])
-		self.assertEqual(frappe.db.get_value("User", email, "default_workspace"), "Administration")
+		self.assertEqual(frappe.db.get_value("User", email, "default_workspace"), "Home")
 		# a system administrator who also holds department roles is still not tied to one department
 		both = ensure_user("fo-landing-sysmgr-prod@example.com", ["System Manager", "Manufacturing User"])
-		self.assertEqual(frappe.db.get_value("User", both, "default_workspace"), "Administration")
+		self.assertEqual(frappe.db.get_value("User", both, "default_workspace"), "Home")
 		# the built-in account too (Frappe grants it every role implicitly)
 		frappe.db.set_value("User", "Administrator", "default_workspace", None)
 		from factory_ops.setup.landing import apply_to_existing_users
 
 		apply_to_existing_users()
-		self.assertEqual(frappe.db.get_value("User", "Administrator", "default_workspace"), "Administration")
+		self.assertEqual(frappe.db.get_value("User", "Administrator", "default_workspace"), "Home")

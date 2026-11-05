@@ -170,7 +170,7 @@ Implemented in `setup/admin_access.py`, re-applied on every migrate (idempotent)
 - **Reports:** a Custom Role per standard report restricted to roles, holding the union of its roles and
   System Manager (for a report Frappe *replaces* the role list with the Custom Role's). Standard Report
   documents are never saved.
-- **Administration** workspace (System Manager only): four real figures (enabled users, failed logins,
+- **Administration** (System Manager only; since section 11 it is ERPNext's own Setup/Home workspace, not a page of its own): four real figures (enabled users, failed logins,
   errors and failed scheduled jobs in 7 days), 16 tiles for every department and the core ERPNext modules,
   and groups for users and access, the audit trail, and settings and integrations. Admins land here, not
   on a department; they switch departments from the tiles, the shell switcher or the home screen, with
@@ -254,7 +254,7 @@ kept apart. Neither is "everything".
 | Job | Technical administration | The business as a whole |
 | Users and roles, system settings, integrations, workspace configuration, technical maintenance | **Yes** (Frappe's own System Manager rights) | **No** (asserted for 25 configuration DocTypes) |
 | Pages | Every business page **and** the technical Administration page | Every business page, **never** Administration |
-| Landing | Administration | Management (the consolidated dashboard) |
+| Landing | Administration (= Setup/Home) | Management (the consolidated dashboard) |
 | Operational records | Read and report, all departments | Read and report, all departments |
 | Business actions | None | **Submit Purchase Orders**, and only within an approval limit an accountant gave them (below) |
 | Document audit trail (Version) | Yes | Read |
@@ -362,3 +362,50 @@ working "create" actions on tiles (Frappe shortcuts open lists; creation stays i
    "grant is idempotent" test failed; existing rows are now read with every right.
 6. The built-in `Administrator` implicitly holds every role (including Business Administrator); it lands on
    Administration, because it is the technical account.
+
+## 11. Administration is ERPNext's own Setup/Home workspace (2026-11-05)
+
+**Decision.** The administrator's page is not a workspace we add: it is the existing, standard `Home`
+workspace of ERPNext's Setup shell (`erpnext/setup/workspace/home/home.json`, module Setup, route
+`/desk/setup/home`), customised. The earlier separate "Administration" workspace (own sidebar, desktop
+icon, navigation module) is retired by `retire_standalone_administration()` on migrate, and anyone whose
+landing page was it is moved to `Home`.
+
+**Mechanism (the least invasive supported one).** Frappe v16 protects a standard workspace from in-place
+edits ("Standard workspaces can't be edited directly") and offers a site-customization layer instead: a
+**Custom Workspace** record whose name is the workspace's. `setup/admin_home.py` writes one for `Home`:
+
+- `content`: a heading block "Administration", the four number cards, the launcher tiles and three link
+  cards. ERPNext's `Organization Onboarding` block, its chart and its three cards are no longer referenced.
+- `widgets`: the number cards, URL tiles and link cards those blocks use (`ensure_admin_home` builds them
+  from `ADMIN_HOME` in `setup/workspaces.py`; a link whose target does not exist is left out).
+- roles: `Desk User` removed, `System Manager` added, as a delta against the live base, so the page is the
+  System Administrator's only (the Business Administrator and department users do not see it).
+
+ERPNext's files and its base `Home` record are not changed (no entry in `CORE_MODIFICATION_LOG.md` is
+needed), ERPNext upgrades keep arriving, and the customization is re-applied idempotently on every migrate.
+`landing.ADMIN_PAGE` is `Home`. The only CSS (`public/css/mintree.css`, one block scoped to
+`body[data-route="Workspaces/Home"]`) lets tile and card names wrap, because Frappe cuts them with "...".
+
+**What the page shows** (all real, nothing typed in): Enabled Users (System Users enabled), Failed Logins,
+Errors Logged and Failed Scheduled Jobs, each over the same last-7-days window (Number Cards on `User`,
+`Activity Log` operation Login / status Failed, `Error Log`, `Scheduled Job Log` status Failed); 9 factory
+workspaces plus 7 ERPNext module pages as tiles; Users and access, Audit trail, Settings and integrations.
+A failed login is a real Frappe record (two wrong passwords against the live server raised the card from 0
+to 2). ERPNext's onboarding stays reachable as **Setup Onboarding** (Module Onboarding list).
+
+**Permissions.** Frappe returns a workspace's layout without a role gate, but each figure is computed by the
+Number Card API under the caller's own rights: department users, Management Viewer and the Business
+Administrator are refused the audit figures server-side (test
+`test_the_audit_figures_are_refused_by_the_server_to_those_without_access`); the menu entry is hidden for
+them as well. Viewing grants nothing.
+
+**Limitations, stated plainly.**
+1. A standard workspace keeps its app-owned title and route: the tab/title bar and the Setup sidebar still say
+   "Home" and the URL stays `/desk/setup/home`. The page itself is headed "Administration". Renaming the
+   title would mean editing ERPNext's `home.json` (a core modification) or developer mode.
+2. Frappe opens URL tiles in a **new tab** (all 16 verified; each opens its real workspace route). There is
+   no Workspace-type shortcut in this Frappe version.
+3. The Failed Scheduled Jobs card reads 0 unless a job really fails; it is not seeded.
+4. Verified in a real browser (Playwright, Chromium) in light and dark themes, at 1440 px and 390 px; no
+   page errors, no clipped name. Not verified: Safari/Firefox.

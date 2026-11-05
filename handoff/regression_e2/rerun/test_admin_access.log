@@ -1,0 +1,90 @@
+Starting test run with parameters: site=test.localhost, module=factory_ops.tests.test_admin_access, verbose=False, tests=(), force=False, profile=False, failfast=False, skip_before_tests=False, debug=False, selected_categories=[]
+View detailed logs (using --verbose): /home/frappe/frappe-bench/logs/frappe.testing.log
+
+Running 26 unspecified-category tests for factory_ops
+
+factory_ops.tests.test_admin_access.TestAdminHasNoActionRights
+   [32m ✔ [0m test_grants_and_report_roles_are_idempotent [31m (3.92s)[0m
+   [31m ✖ [0m test_no_action_right_beyond_what_erpnext_itself_grants
+       ▸  /home/frappe/frappe-bench/apps/frappe/frappe/model/qb_query.py:163: V17FrappeDeprecationWarning: This codepath was marked (DATE: 2024-01-01) deprecated for removal (from v17 onwards); note:
+       ▸   The 'limit_page_length' parameter is deprecated. Use 'limit' instead.
+       ▸  
+       ▸    deprecation_warning(
+   [31m ✖ [0m test_report_roles_are_the_union_and_heal_after_drift
+   [32m ✔ [0m test_rnd_masters_keep_the_explicit_admin_rights_their_doctype_declares
+   [32m ✔ [0m test_transaction_documents_are_view_only_for_the_administrator
+   [32m ✔ [0m test_what_is_granted_is_exactly_read_and_report
+
+factory_ops.tests.test_admin_access.TestAdminSearchAcrossDepartments
+   [32m ✔ [0m test_a_system_manager_finds_a_work_order_made_by_production
+
+factory_ops.tests.test_admin_access.TestAdminVisibility
+   [32m ✔ [0m test_admin_can_read_every_operational_doctype_and_report_on_it [31m (3.05s)[0m
+   [32m ✔ [0m test_admin_can_search_other_departments_records_with_the_permission_aware_list
+   [32m ✔ [0m test_admin_sees_every_department_and_every_erpnext_module_page
+   [32m ✔ [0m test_department_pages_carry_the_administrator_and_the_icons_too
+   [32m ✔ [0m test_every_link_and_report_on_every_page_opens_for_the_administrator
+
+factory_ops.tests.test_admin_access.TestAdministrationWorkspace
+   [32m ✔ [0m test_it_is_not_a_department_page
+   [32m ✔ [0m test_it_links_every_department_and_the_erpnext_modules
+   [32m ✔ [0m test_its_cards_compute_for_the_administrator
+   [32m ✔ [0m test_its_cards_count_real_records
+
+factory_ops.tests.test_admin_access.TestControlsHoldForAdministrators
+   [32m ✔ [0m test_held_stock_cannot_be_moved_by_the_administrator_account_or_a_system_manager
+   [32m ✔ [0m test_system_manager_cannot_create_or_submit_a_qc_release
+   [32m ✔ [0m test_the_administrator_account_cannot_release_what_it_received
+   [32m ✔ [0m test_the_dispatch_guard_applies_to_the_administrator_account
+
+factory_ops.tests.test_admin_access.TestDepartmentIsolation
+   [32m ✔ [0m test_departments_cannot_open_other_departments_documents
+   [32m ✔ [0m test_no_department_user_sees_the_administration_page
+   [32m ✔ [0m test_the_administration_page_belongs_to_the_administrator_only
+
+factory_ops.tests.test_admin_access.TestOperatorLimits
+   [32m ✔ [0m test_a_qc_officer_cannot_do_the_qa_managers_actions
+   [32m ✔ [0m test_only_qc_roles_create_or_submit_qc_decisions
+   [32m ✔ [0m test_operators_cannot_delete_core_records
+
+
+======================================================================
+ FAIL  test_no_action_right_beyond_what_erpnext_itself_grants (factory_ops.tests.test_admin_access.TestAdminHasNoActionRights.test_no_action_right_beyond_what_erpnext_itself_grants)
+For every operational DocType, any action the administrator can take must be backed by
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frappe/factory_ops/factory_ops/tests/test_admin_access.py", line 145, in test_no_action_right_beyond_what_erpnext_itself_grants
+    self.assertTrue(backed, f"{doctype}: administrator can {right} without an upstream permission for it")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    backed = False
+    doctype = 'South Africa VAT Settings'
+    right = 'write'
+    roles = {'Guest', 'Workspace Manager', 'Desk User', 'All', 'System Manager'}
+    self = <factory_ops.tests.test_admin_access.TestAdminHasNoActionRights testMethod=test_no_action_right_beyond_what_erpnext_itself_grants>
+    standard = [{'role': 'Auditor', 'write': 0, 'create': 0, 'submit': 0, 'cancel': 0, 'delete': 0, 'amend': 0}, {'role': 'Accounts Manager', 'write': 1, 'create': 1, 'submit': 0, 'cancel': 0, 'delete': 1, 'amend': 0}, {'role': 'Accounts User', 'write': 1, 'create': 1, 'submit': 0, 'cancel': 0, 'delete': 1, 'amend': 0}]
+AssertionError: False is not true : South Africa VAT Settings: administrator can write without an upstream permission for it
+
+Stderr:
+/home/frappe/frappe-bench/apps/frappe/frappe/model/qb_query.py:163: V17FrappeDeprecationWarning: This codepath was marked (DATE: 2024-01-01) deprecated for removal (from v17 onwards); note:
+ The 'limit_page_length' parameter is deprecated. Use 'limit' instead.
+
+  deprecation_warning(
+
+======================================================================
+ FAIL  test_report_roles_are_the_union_and_heal_after_drift (factory_ops.tests.test_admin_access.TestAdminHasNoActionRights.test_report_roles_are_the_union_and_heal_after_drift)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/frappe/factory_ops/factory_ops/tests/test_admin_access.py", line 174, in test_report_roles_are_the_union_and_heal_after_drift
+    self.assertIn(ADMIN, roles, c.report)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+    c = {'name': 'aa03sh8jjp', 'report': 'VAT Audit Report'}
+    custom = [{'name': 'aa03sh8jjp', 'report': 'VAT Audit Report'}, {'name': 'a6pi5ccnhm', 'report': 'UAE VAT 201'}, {'name': '971oht3c3u', 'report': 'Serial No Service Contract Expiry'}, {'name': '97108uf1ka', 'report': 'Serial No Warranty Expiry'}, {'name': '97190pkktd', 'report': 'Serial No Status'}]
+    roles = {'Accounts Manager', 'Auditor', 'Accounts User'}
+    self = <factory_ops.tests.test_admin_access.TestAdminHasNoActionRights testMethod=test_report_roles_are_the_union_and_heal_after_drift>
+    standard = set()
+AssertionError: 'System Manager' not found in {'Accounts Manager', 'Auditor', 'Accounts User'} : VAT Audit Report
+
+----------------------------------------------------------------------
+Ran 26 tests in 95.354s
+
+FAILED (failures=2)

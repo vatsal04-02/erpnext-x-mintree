@@ -155,9 +155,11 @@ def ensure_admin_reports() -> list[str]:
 			)
 			if frappe.db.exists("Role", r)
 		}
-		if not standard:
-			continue  # open to anyone with the right on the DocType
 		existing = frappe.db.get_value("Custom Role", {"report": report.name}, "name")
+		if not standard and not existing:
+			continue  # open to anyone with the right on the DocType
+		# (a report that is open upstream can still gain a restrictive Custom Role, e.g. ERPNext's South
+		# Africa setup restricts the VAT Audit Report: the administrators must be added to that too)
 		if existing:
 			doc = frappe.get_doc("Custom Role", existing)
 			have = {r.role for r in doc.roles}

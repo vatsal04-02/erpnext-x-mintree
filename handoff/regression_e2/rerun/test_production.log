@@ -1,0 +1,43 @@
+Starting test run with parameters: site=test.localhost, module=factory_ops.tests.test_production, verbose=False, tests=(), force=False, profile=False, failfast=False, skip_before_tests=False, debug=False, selected_categories=[]
+View detailed logs (using --verbose): /home/frappe/frappe-bench/logs/frappe.testing.log
+
+Running 16 unspecified-category tests for factory_ops
+
+factory_ops.tests.test_production.TestProductionControls
+   [32m ✔ [0m test_bom_cannot_draw_from_hold
+   [32m ✔ [0m test_bulk_cannot_be_exploded_into_raw_materials
+   [32m ✔ [0m test_configured_source_beats_an_item_level_default_warehouse
+   [32m ✔ [0m test_defaults_for_three_component_groups
+   [32m ✔ [0m test_manually_entered_restricted_warehouses_are_refused
+   [32m ✔ [0m test_ordinary_issue_and_consumption_need_no_reason
+   [32m ✔ [0m test_production_permissions
+       ▸  /home/frappe/frappe-bench/apps/frappe/frappe/model/qb_query.py:163: V17FrappeDeprecationWarning: This codepath was marked (DATE: 2024-01-01) deprecated for removal (from v17 onwards); note:
+       ▸   The 'limit_page_length' parameter is deprecated. Use 'limit' instead.
+       ▸  
+       ▸    deprecation_warning(
+   [32m ✔ [0m test_sample_boms
+   [32m ✔ [0m test_scrap_from_rejected_uses_the_disposal_reason
+   [32m ✔ [0m test_warehouse_mapping_is_configuration
+   [32m ✔ [0m test_wastage_type_must_be_a_material_issue
+   [32m ✔ [0m test_wastage_write_off_needs_an_enabled_reason
+   [32m ✔ [0m test_work_order_warehouse_defaults
+
+factory_ops.tests.test_production.TestProductionE2E
+   [32m ✔ [0m test_duplicate_submission_and_rollback [31m (4.87s)[0m
+       ▹  second Manufacture refused: Manufactured Qty (including Process Loss) (200.0) cannot be greater than planned quantity (100.0) in Work Order MFG-WO-2026-00001
+   [32m ✔ [0m test_released_bulk_that_was_used_cannot_be_unmade [31m (3.09s)[0m
+       ▹  refused: Batch No <strong>SAMPLE-BULK-0001-26-00001</strong> of an Item <strong>SAMPLE-BULK-0001</strong>
+       ▹  				has negative stock
+       ▹  				of quantity <strong>-30.0</strong> in the
+       ▹  				warehouse BULK-STORES - _FOPC
+       ▹  refused: Batch No <strong>SAMPLE-BULK-0001-26-00001</strong> of an Item <strong>SAMPLE-BULK-0001</strong>
+       ▹  				has negative stock
+       ▹  				of quantity <strong>-98.0</strong> in the
+       ▹  				warehouse BULK-QC-HOLD - _FOPC
+   [32m ✔ [0m test_two_stage_production_with_ledger_checks [31m (4.81s)[0m
+
+
+----------------------------------------------------------------------
+Ran 16 tests in 44.781s
+
+OK

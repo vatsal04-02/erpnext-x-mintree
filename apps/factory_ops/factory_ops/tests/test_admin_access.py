@@ -16,7 +16,9 @@ from frappe.desk.doctype.number_card.number_card import get_result
 from factory_ops.inventory.guards import QCGuardError
 from factory_ops.quality.doctype.qc_release.qc_release import SegregationOfDutiesError
 from factory_ops.setup import admin_access
+from factory_ops.setup import admin_home
 from factory_ops.setup.workspaces import (
+	ADMIN_HOME,
 	DEPARTMENT_ORDER,
 	ERPNEXT_MODULES,
 	WORKSPACES,
@@ -52,6 +54,17 @@ TRANSACTIONS = (
 # their own DocType JSON (an earlier design decision); they are masters, not transactions, and are
 # asserted separately below so the exception is visible and cannot widen unnoticed.
 RND_MASTERS_WITH_EXPLICIT_ADMIN_RIGHTS = ("Formulation", "Research Project", "Ingredient Category")
+
+
+def effective_home() -> "frappe.model.document.Document":
+	"""ERPNext's Home workspace with the site customization applied, as Desk renders it."""
+	from frappe.desk.doctype.custom_workspace.custom_workspace import apply_customization, get_customization
+
+	doc = frappe.get_doc("Workspace", "Home")
+	customization = get_customization("Home")
+	assert customization, "Home has no Custom Workspace: the Administration page is not applied"
+	apply_customization(doc, customization)
+	return doc
 
 
 def all_visible(user: str) -> set[str]:
@@ -138,6 +151,11 @@ class TestAdminHasNoActionRights(AdminTestCase):
 		the upstream (standard) permission rows of one of the administrator's own roles."""
 		roles = set(frappe.get_roles(SYSADMIN))
 		for doctype in admin_access.operational_doctypes():
+			if frappe.db.get_value("DocType", doctype, "module") == "Regional":
+				# country-specific DocTypes (UAE / South Africa VAT): ERPNext's own regional setup grants
+				# System Manager rights through Custom DocPerm when a company of that country is created
+				# (the ERPNext test bootstrap creates one). That is an upstream grant, not one of ours.
+				continue
 			standard = frappe.get_all("DocPerm", filters={"parent": doctype, "permlevel": 0}, fields=["role", *admin_access.ACTION_RIGHTS])
 			for right in admin_access.ACTION_RIGHTS:
 				if frappe.has_permission(doctype, right, user=SYSADMIN):
@@ -184,7 +202,7 @@ class TestAdminHasNoActionRights(AdminTestCase):
 class TestDepartmentIsolation(AdminTestCase):
 	def test_no_department_user_sees_the_administration_page(self):
 		for user in EXPECTED:
-			self.assertNotIn("Administration", all_visible(user), user)
+			self.assertNotIn("Home", all_visible(user), user)
 
 	def test_departments_cannot_open_other_departments_documents(self):
 		denied = {
@@ -199,10 +217,12 @@ class TestDepartmentIsolation(AdminTestCase):
 				self.assertFalse(frappe.has_permission(doctype, "read", user=user), f"{user} can read {doctype}")
 
 	def test_the_administration_page_belongs_to_the_administrator_only(self):
-		doc = frappe.get_doc("Workspace", "Administration")
-		self.assertEqual({r.role for r in doc.roles}, {ADMIN})
-		self.assertEqual({r.role for r in frappe.get_doc("Desktop Icon", "Administration").roles}, {ADMIN})
-		self.assertIn("Administration", all_visible(SYSADMIN))
+		self.assertEqual({r.role for r in effective_home().roles}, {ADMIN})
+		self.assertIn("Home", all_visible(SYSADMIN))
+		for user in (USER_MANAGEMENT, USER_BUYER, USER_QC, USER_STORES):
+			self.assertNotIn("Home", all_visible(user), user)
+		business_owner = ensure_user("fo-bizadmin-home@example.com", ["Business Administrator"])
+		self.assertNotIn("Home", all_visible(business_owner))  # the owner sees business pages, not the technical one
 
 
 class TestOperatorLimits(AdminTestCase):
@@ -266,17 +286,64 @@ class TestControlsHoldForAdministrators(AdminTestCase):
 
 
 class TestAdministrationWorkspace(AdminTestCase):
+	"""The Administration page is ERPNext's own Setup/Home workspace, customised (never a separate page)."""
+
+	def admin_cards(self):
+		wanted = {card_name(c) for c in ADMIN_HOME["cards"]}
+		return [row for row in effective_home().number_cards if row.number_card_name in wanted]
+
+	def test_it_is_the_native_home_workspace_not_a_separate_page(self):
+		self.assertFalse(frappe.db.exists("Workspace", "Administration"))
+		self.assertFalse(frappe.db.exists("Desktop Icon", "Administration"))
+		self.assertFalse(frappe.db.exists("Sidebar", "Administration"))
+		self.assertFalse(frappe.db.exists("Module Def", "Administration"))
+		self.assertTrue(frappe.db.get_value("Workspace", "Home", "standard"))
+		self.assertEqual(frappe.db.get_value("Custom Workspace", "Home", "workspace"), "Home")
+
+	def test_erpnexts_own_record_and_onboarding_are_untouched(self):
+		base = frappe.get_doc("Workspace", "Home")
+		self.assertEqual({r.role for r in base.roles}, {"Desk User"})  # the customization layers on top
+		self.assertTrue(any(b["type"] == "onboarding" for b in json.loads(base.content)))
+		self.assertTrue(frappe.db.exists("Module Onboarding", "Organization Onboarding"))
+
+	def test_the_page_shows_administration_not_the_onboarding_panel(self):
+		blocks = json.loads(effective_home().content)
+		self.assertEqual((blocks[0]["type"], "Administration" in blocks[0]["data"]["text"]), ("header", True))
+		self.assertNotIn("onboarding", {b["type"] for b in blocks})
+		self.assertEqual([b["type"] for b in blocks[1:5]], ["number_card"] * 4)
+
 	def test_it_links_every_department_and_the_erpnext_modules(self):
-		doc = frappe.get_doc("Workspace", "Administration")
+		doc = effective_home()
 		tiles = [(s.label, s.url) for s in doc.shortcuts if s.type == "URL"]
 		self.assertEqual([t[0] for t in tiles], list(DEPARTMENT_ORDER) + list(ERPNEXT_MODULES))
-		self.assertEqual(set(DEPARTMENT_ORDER), set(WORKSPACES) - {"Administration"})
+		self.assertEqual(set(DEPARTMENT_ORDER), set(WORKSPACES))
 		for label, url in tiles:
 			self.assertTrue(frappe.db.exists("Workspace", label), label)
 			self.assertEqual(url, workspace_route(label), label)
 
-	def test_its_cards_compute_for_the_administrator(self):
-		for row in frappe.get_doc("Workspace", "Administration").number_cards:
+	def test_every_link_points_at_something_that_exists(self):
+		doc = effective_home()
+		groups = {}
+		for link in doc.links:
+			if link.type == "Card Break":
+				groups[link.label] = []
+			elif link.type == "Link":
+				groups[list(groups)[-1]].append(link.link_to)
+				self.assertTrue(frappe.db.exists(link.link_type, link.link_to), link.link_to)
+		self.assertEqual(
+			list(groups), ["Users and access", "Audit trail", "Settings and integrations"]
+		)
+		self.assertEqual(
+			groups["Users and access"], ["User", "Role", "Role Profile", "Module Profile", "User Permission"]
+		)
+		self.assertEqual(
+			groups["Audit trail"], ["Activity Log", "Version", "Access Log", "Error Log", "Scheduled Job Log"]
+		)
+
+	def test_its_four_cards_compute_for_the_administrator(self):
+		rows = self.admin_cards()
+		self.assertEqual(len(rows), 4)
+		for row in rows:
 			card = frappe.get_doc("Number Card", row.number_card_name)
 			self.assertTrue(frappe.has_permission("Number Card", doc=card, user=SYSADMIN), card.name)
 			with self.set_user(SYSADMIN):
@@ -292,9 +359,42 @@ class TestAdministrationWorkspace(AdminTestCase):
 		)
 		self.assertEqual(int(shown), expected)
 
+	def test_each_figure_uses_the_same_seven_day_window_and_real_status(self):
+		by_label = {frappe.get_doc("Number Card", r.number_card_name).label: json.loads(
+			frappe.db.get_value("Number Card", r.number_card_name, "filters_json")
+		) for r in self.admin_cards()}
+		self.assertIn(["Activity Log", "status", "=", "Failed", False], by_label["Failed Logins (7 days)"])
+		self.assertIn(["Activity Log", "operation", "=", "Login", False], by_label["Failed Logins (7 days)"])
+		self.assertIn(["Scheduled Job Log", "status", "=", "Failed", False], by_label["Failed Scheduled Jobs (7 days)"])
+		for label in ("Failed Logins (7 days)", "Errors Logged (7 days)", "Failed Scheduled Jobs (7 days)"):
+			self.assertTrue(any(f[1] == "creation" and f[3] == "last 7 days" for f in by_label[label]), label)
+
+	def test_applying_it_again_changes_nothing(self):
+		self.assertFalse(admin_home.ensure_admin_home())
+		self.assertEqual(admin_home.retire_standalone_administration(), None)
+
+	def test_the_audit_figures_are_refused_by_the_server_to_those_without_access(self):
+		"""Not just hidden from the menu: Frappe returns a workspace's layout without a role gate, but every
+		figure is computed by the Number Card API under the caller's own rights on the underlying DocType."""
+		owner = ensure_user("fo-bizadmin-home2@example.com", ["Business Administrator"])
+		audit = ("FO Failed Logins 7 Days", "FO Errors 7 Days", "FO Failed Jobs 7 Days")
+		for user in (USER_PRODUCTION, USER_BUYER, USER_QC, USER_MANAGEMENT, owner):
+			for key in audit:
+				card = frappe.get_doc("Number Card", card_name(key))
+				self.assertFalse(
+					frappe.has_permission("Number Card", doc=card, user=user), f"{user} may read {card.name}"
+				)
+				with self.set_user(user):
+					with self.assertRaises(frappe.PermissionError, msg=f"{user}: {card.name}"):
+						get_result(card.as_dict(), card.filters_json)
+		for key in audit:  # and the System Administrator is served
+			card = frappe.get_doc("Number Card", card_name(key))
+			with self.set_user(SYSADMIN):
+				get_result(card.as_dict(), card.filters_json)
+
 	def test_it_is_not_a_department_page(self):
-		self.assertNotIn("Administration", DEPARTMENT_ORDER)
-		self.assertEqual(json.loads(frappe.db.get_value("Workspace", "Administration", "content"))[0]["type"], "number_card")
+		self.assertNotIn("Home", DEPARTMENT_ORDER)
+		self.assertNotIn("Administration", WORKSPACES)
 
 
 class TestAdminSearchAcrossDepartments(ProductionTestCase):

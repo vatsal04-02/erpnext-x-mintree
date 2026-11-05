@@ -11,7 +11,8 @@ never overwritten. It runs when a user is saved and, once per migrate, for exist
 
 A Business Administrator (the owner) lands on **Management**, the consolidated business dashboard.
 A System Administrator (System Manager, including the built-in Administrator) lands on the technical
-**Administration** page. Neither lands on a single department, whatever other roles they hold; from
+**Administration** page, which is ERPNext's own Setup/Home workspace customised
+for them (not a separate page). Neither lands on a single department, whatever other roles they hold; from
 there, and from the shell switcher, every department they may see is one click away. Someone holding
 both roles lands on Management: the business view first. Landing is a
 convenience only: it decides which page opens, not what anyone may do.
@@ -24,7 +25,7 @@ import frappe
 # staff are Stock users too, so their own workspaces come first.
 ADMIN_ROLE = "System Manager"
 BUSINESS_ADMIN_ROLE = "Business Administrator"
-ADMIN_PAGE = "Administration"
+ADMIN_PAGE = "Home"  # ERPNext's own Setup/Home, shown as the Administration page (setup/admin_home.py)
 BUSINESS_PAGE = "Management"
 LANDING_PRIORITY = (
 	"Management",

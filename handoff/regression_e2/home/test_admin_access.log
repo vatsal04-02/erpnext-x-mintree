@@ -1,0 +1,60 @@
+Starting test run with parameters: site=test.localhost, module=factory_ops.tests.test_admin_access, verbose=False, tests=(), force=False, profile=False, failfast=False, skip_before_tests=False, debug=False, selected_categories=[]
+View detailed logs (using --verbose): /home/frappe/frappe-bench/logs/frappe.testing.log
+
+Running 32 unspecified-category tests for factory_ops
+
+factory_ops.tests.test_admin_access.TestAdminHasNoActionRights
+   [32m ✔ [0m test_grants_and_report_roles_are_idempotent [31m (3.96s)[0m
+   [32m ✔ [0m test_no_action_right_beyond_what_erpnext_itself_grants
+       ▸  /home/frappe/frappe-bench/apps/frappe/frappe/model/qb_query.py:163: V17FrappeDeprecationWarning: This codepath was marked (DATE: 2024-01-01) deprecated for removal (from v17 onwards); note:
+       ▸   The 'limit_page_length' parameter is deprecated. Use 'limit' instead.
+       ▸  
+       ▸    deprecation_warning(
+   [32m ✔ [0m test_report_roles_are_the_union_and_heal_after_drift
+   [32m ✔ [0m test_rnd_masters_keep_the_explicit_admin_rights_their_doctype_declares
+   [32m ✔ [0m test_transaction_documents_are_view_only_for_the_administrator
+   [32m ✔ [0m test_what_is_granted_is_exactly_read_and_report
+
+factory_ops.tests.test_admin_access.TestAdminSearchAcrossDepartments
+   [32m ✔ [0m test_a_system_manager_finds_a_work_order_made_by_production
+
+factory_ops.tests.test_admin_access.TestAdminVisibility
+   [32m ✔ [0m test_admin_can_read_every_operational_doctype_and_report_on_it [31m (3.06s)[0m
+   [32m ✔ [0m test_admin_can_search_other_departments_records_with_the_permission_aware_list
+   [32m ✔ [0m test_admin_sees_every_department_and_every_erpnext_module_page
+   [32m ✔ [0m test_department_pages_carry_the_administrator_and_the_icons_too
+   [32m ✔ [0m test_every_link_and_report_on_every_page_opens_for_the_administrator
+
+factory_ops.tests.test_admin_access.TestAdministrationWorkspace
+   [32m ✔ [0m test_applying_it_again_changes_nothing
+   [32m ✔ [0m test_each_figure_uses_the_same_seven_day_window_and_real_status
+   [32m ✔ [0m test_erpnexts_own_record_and_onboarding_are_untouched
+   [32m ✔ [0m test_every_link_points_at_something_that_exists
+   [32m ✔ [0m test_it_is_not_a_department_page
+   [32m ✔ [0m test_it_is_the_native_home_workspace_not_a_separate_page
+   [32m ✔ [0m test_it_links_every_department_and_the_erpnext_modules
+   [32m ✔ [0m test_its_cards_count_real_records
+   [32m ✔ [0m test_its_four_cards_compute_for_the_administrator
+   [32m ✔ [0m test_the_page_shows_administration_not_the_onboarding_panel
+
+factory_ops.tests.test_admin_access.TestControlsHoldForAdministrators
+   [32m ✔ [0m test_held_stock_cannot_be_moved_by_the_administrator_account_or_a_system_manager
+   [32m ✔ [0m test_system_manager_cannot_create_or_submit_a_qc_release
+   [32m ✔ [0m test_the_administrator_account_cannot_release_what_it_received
+   [32m ✔ [0m test_the_dispatch_guard_applies_to_the_administrator_account
+
+factory_ops.tests.test_admin_access.TestDepartmentIsolation
+   [32m ✔ [0m test_departments_cannot_open_other_departments_documents
+   [32m ✔ [0m test_no_department_user_sees_the_administration_page
+   [32m ✔ [0m test_the_administration_page_belongs_to_the_administrator_only
+
+factory_ops.tests.test_admin_access.TestOperatorLimits
+   [32m ✔ [0m test_a_qc_officer_cannot_do_the_qa_managers_actions
+   [32m ✔ [0m test_only_qc_roles_create_or_submit_qc_decisions
+   [32m ✔ [0m test_operators_cannot_delete_core_records
+
+
+----------------------------------------------------------------------
+Ran 32 tests in 96.460s
+
+OK

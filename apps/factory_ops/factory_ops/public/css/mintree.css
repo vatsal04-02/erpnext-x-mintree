@@ -26,3 +26,22 @@
 	height: 32px;
 	width: auto;
 }
+
+/* Administration (ERPNext's own Setup/Home workspace, see setup/admin_home.py): show a tile's or a
+   card's whole name instead of cutting it with "..." ("Research and Development", "Failed Scheduled Jobs
+   (7 days)"). Scoped to that one page by its route; every other workspace keeps ERPNext's behaviour. */
+body[data-route="Workspaces/Home"] .shortcut-widget-box .widget-title .ellipsis,
+body[data-route="Workspaces/Home"] .number-widget-box .widget-title .ellipsis {
+	white-space: normal;
+	overflow: visible;
+	text-overflow: clip;
+	overflow-wrap: anywhere;
+	line-height: 1.3;
+}
+body[data-route="Workspaces/Home"] .shortcut-widget-box .widget-head,
+body[data-route="Workspaces/Home"] .shortcut-widget-box .widget-label,
+body[data-route="Workspaces/Home"] .shortcut-widget-box .widget-title {
+	display: flex;
+	align-items: center;
+	height: 100%;
+}
